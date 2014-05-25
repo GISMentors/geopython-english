@@ -11,7 +11,7 @@ Pracovní prostředí:
 * Data archive:
   https://gismentors.github.io/pygis/pygis-workshop.zip
 * Jednotlivé kroky
-  https://github.com/gismentors/pygis/tree/master/kroky
+  https://github.com/gismentors/pygis/tree/master/kurz
 
 * Nastavení
     
