@@ -1,0 +1,62 @@
+==========
+Python-GIS
+==========
+Vychází z workshopu `FOSS4G-CEE-2013 Python-GIS
+<https://github.com/mgax/foss4gcee2013-pygis/>`_ 
+
+Pracovní prostředí: 
+~~~~~~~~~~~~~~~~~~~
+* OSGeo Live:
+  http://live.osgeo.org/en/index.html
+* Data archive:
+  https://gismentors.github.io/pygis/pygis-workshop.zip
+* Jednotlivé kroky
+  https://github.com/gismentors/pygis/tree/master/kurz
+
+* Nastavení
+    
+    sudo apt-get install gedit gedit-plugins
+    cd ~/Desktop
+    curl -O http://gismentors.github.io/pygis/pygis-workshop.zip
+    unzip pygis-workshop.zip
+
+* Kompletní výsledný program
+  https://github.com/gismentors/pygis/tree/master/hikers.py
+
+
+Další čtení
+~~~~~~~~~~~~~~~
+* Učebnice jazyka Python (česky): http://www.root.cz/knihy/ucebnice-jazyka-python/
+* Python guide: http://docs.python-guide.org/en/latest/
+* Resources for learning Python:
+  http://docs.python-guide.org/en/latest/intro/learning.html
+* Shapely manual: http://toblerity.github.io/shapely/manual.html
+* PostGIS: http://postgis.net/
+* GDAL: http://www.gdal.org/
+* "Python Geospatial Development" book, Erik Westra:
+  http://www.packtpub.com/python-geospatial-development/book
+  (2nd edition just out)
+* The GIS Stack Exchange: http://gis.stackexchange.com/
+* Last but not least, https://www.google.com/
+
+Obsah
+~~~~~
+
+.. toctree::
+   :maxdepth: 2
+
+   kurz/01-uvod-ahoj-svete
+   kurz/02-nacteni-shapefile
+   kurz/03-nacteni-csv
+   kurz/04-spojeni
+   kurz/05-transformace-centroidy
+   kurz/06-filtrovani-vzdalenost
+   kurz/07-pocet-vyletniku
+   kurz/08-ulozeni-cest
+   kurz/09-parametry-prkazove-radky
+   kurz/10-postgis-nacteni
+   kurz/11-intersect-shapely
+   kurz/12-ulozeni-hranic
+   kurz/13-pocet-vyletniku
+   kurz/14-vypocet-hustoty
+   kurz/15-ulozeni-hustoty

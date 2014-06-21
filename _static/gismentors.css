@@ -1,0 +1,13 @@
+/*
+ * gismentors.css
+ * ~~~~~~~~~~~~~~
+ *
+ * Customized GISMentors stylesheet
+ *
+ */
+
+@import url("gismentors_base.css");
+
+a {
+  color: #336699;
+}
