@@ -152,7 +152,7 @@ div.header div.rel {
 }
 
 div.header div.rel a {
-  color: #000000;
+  color: white;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
@@ -337,7 +337,7 @@ div.footer-wrapper {
 }
 
 div.footer, div.footer a {
-  color: #000000;
+  color: white;
 }
 
 div.footer .right {
