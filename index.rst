@@ -9,7 +9,7 @@ Pracovní prostředí:
 * OSGeo Live:
   http://live.osgeo.org/en/index.html
 * Data archive:
-  https://gismentors.github.io/pygis/pygis-workshop.zip
+  https://github.com/GISMentors/dataset
 * Jednotlivé kroky
   https://github.com/gismentors/pygis/tree/master/kurz
 
@@ -22,6 +22,9 @@ Pracovní prostředí:
 
 * Kompletní výsledný program
   https://github.com/gismentors/pygis/tree/master/hikers.py
+
+* Stažení dat RUIAN
+  http://46.28.111.140/gismentors/skoleni/geodata/ruian/
 
 
 Další čtení
