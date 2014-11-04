@@ -13,3 +13,9 @@ nízkoúrovňová knihovna, pomocí které lze provádět více nízkoúrovňovn
 
 V průběhu kurzu načteme a zpracujeme data, se kterými se lze v České republice
 běžně setkat, zejména data z registru RUIAN.
+
+.. toctree::
+   :maxdepth: 2
+
+   ogr/index
+   fiona/index

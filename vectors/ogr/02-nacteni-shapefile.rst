@@ -19,7 +19,7 @@ Doporučujeme používat oddělené funkce pro pozdější větší přehlednost
             print city.GetField('nazev'), city_centroid
 
     def main():
-        ruian = ogr.Open('vfr-uksg-2014-10.gpkg')
+        ruian = ogr.Open('ruian_cr.gpkg')
         cities_layer = ruian.GetLayer(16)
         calculate_hikers(cities_layer)
         ruian.Destroy()

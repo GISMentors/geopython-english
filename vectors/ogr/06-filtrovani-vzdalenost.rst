@@ -7,9 +7,11 @@ Vypočítat geodetickou vzdálenost a vytisknout pouze blízké parky
     import pyproj
     geod = pyproj.Geod(ellps='WGS84')
 
+    MAX_LAZINESS_DISTANCE = 50000  # 50 Km
+
+
     def calculate_hikers(cities_layer, population, parks_data):
 
-        max_distance = 50000  # 50 Km
         for i in range(cities_layer.GetFeatureCount()):
             # ...
             city_centroid = city_geom.Centroid()
@@ -19,5 +21,5 @@ Vypočítat geodetickou vzdálenost a vytisknout pouze blízké parky
                 (angle1, angle2, distance) = geod.inv(
                     city_centroid.GetX(), city_centroid.GetY(),
                     park_centroid.GetX(), park_centroid.GetY())
-                if distance < max_distance:
+                if distance < MAX_LAZINESS_DISTANCE:
                     print '->', park['name'], distance

@@ -48,18 +48,4 @@ Obsah
 .. toctree::
    :maxdepth: 2
 
-   kurz/01-uvod-ahoj-svete
-   kurz/02-nacteni-shapefile
-   kurz/03-nacteni-csv
-   kurz/04-spojeni
-   kurz/05-transformace-centroidy
-   kurz/06-filtrovani-vzdalenost
-   kurz/07-pocet-vyletniku
-   kurz/08-ulozeni-cest
-   kurz/09-parametry-prkazove-radky
-   kurz/10-postgis-nacteni
-   kurz/11-intersect-shapely
-   kurz/12-ulozeni-hranic
-   kurz/13-pocet-vyletniku
-   kurz/14-vypocet-hustoty
-   kurz/15-ulozeni-hustoty
+   vectors/index
