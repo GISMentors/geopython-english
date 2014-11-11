@@ -1,18 +1,19 @@
-Vektory pomocí knihovny OGR
-===========================
-Knihovna `OGR <http://gdal.org/ogr>`_ (která je vektorová část knihovny `GDAL
-<http://gdal.org>`_), představuje tradiční nízkoúrovňový způsob práce s vektorovými daty. Postupy v této knihovně uplatněné se jevíce blíží jazyku C++, ve kterém je tato knihovna napsána. Bez pochyby je dobré znát některé principy a postupy, jak s touto knihovnou pracovat, v dnešní době je ale vhodnější zvolit některého moderního nástupce, jak například knihovnu `Shapely <http://toblerity.org/shapely/>`_ a `Fiona <http://toblerity.org/fiona/>`_.
+Vektory pomocí knihovny Fiona
+=============================
+Knihovna `Fiona <http://toblerity.org/fiona/>`_, představuje modernější způsob
+práce s vektorovými daty. Finoa je nadstavba nad knihovnou OGR. Načtená data ze
+souborů přemapovává do GeoJSONí struktury a stejné struktury zapisuje zpět do
+souborů. Uživatel se nemusí zabývat kurzory, vrstvami, geometrickými operacemi.
+
+Fiona není nástroj vhodný na **všechny** operace - jednoduchost práce je
+vykoupena poněkud pomalejším během. Tam kde OGR používá pointery, Fiona
+zkopíruje vektorová data do objektů jazyka Python, což samozřejmě vede k
+intenzivnějšímu využívání paměti. Pokud potřebujete filtrovat objekty, OGR je
+asi vhodnější. Pokud potřebujete zpracovat postupně všechny objekty, Fiona by
+měla být rychlejší.
+
+Fiona je vhodná na binární souborové formáty dat. Kde pracujete s daty
+(Geo)JSON, používejte **json** balíček. Kde pracujete s daty v databázích,
+používejte jejich knihovny. 
 
 
-.. toctree::
-   :maxdepth: 2
-
-   01-uvod-ahoj-svete
-   02-nacteni-shapefile
-   03-nacteni-csv
-   04-spojeni
-   05-transformace-centroidy
-   06-filtrovani-vzdalenost
-   07-pocet-vyletniku
-   08-ulozeni-cest
-   09-parametry-prkazove-radky
