@@ -54,3 +54,4 @@ Obsah
    vectors/index
    pyproj/index
    rasters/index
+   mapscript/index
