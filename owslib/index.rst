@@ -69,7 +69,82 @@ přímo nalezneme na adrese http://geoportal.gov.cz/php/micka/csw/index.php
 
 .. code-block:: python
 
-    from owslib import csw as catalogueservice
+    >>> from owslib.csw import CatalogueServiceWeb
+    >>> cenia = CatalogueServiceWeb('http://geoportal.gov.cz/php/micka/csw/index.php')
+    >>> cenia.servicetype
+    'CSW'
+
+Vyhledávání záznamů, které jsou služba a obsahují klíčové slovo `WMS`.
+
+.. code-block:: python
+
+    >>> cenia.getrecords2()
+    >>> cenia.results
+    {'matches': 422, 'nextrecord': 11, 'returned': 10}
+
+Zjištění hodnot nalezených záznamů:
+
+.. code-block:: python
+
+    >>> for rec in cenia.records:
+    ...     print cenia.records[rec].title
+    ....
+    ÚP VÚC Adršpach
+    Pasport úpo na území Královéhradeckého kraje
+    VÚC Hradecko-Pardubické aglomerace
+    ÚP VÚC okresu Jičín
+    ÚP VÚC Krkonoše
+    ÚP VÚC Orlické hory a podhůří
+    ÚP VÚC Trutnovsko - Náchodsko
+    Prognóza rozvoje území kraje
+    Pasport obcí ÚPD Pardubického kraje - mapová služba WMS
+    WMS služba Pardubického kraje - polohopis, ortofoto
+
+Vyhledávání s omezením na záznamy obsahující slovo *WMS* a s omezeným bounding
+boxem na oblast Prahy:
+
+.. code-block:: python
+
+    >>> from owslib.fes import PropertyIsLike, BBox, And
+    >>> wms_query = PropertyIsEqualTo('csw:AnyText', 'WMS')
+    >>> praha_query = BBox([14.22,49.94,14.71,50.18])
+    >>> praha_and_wms = And([praha_query, wms_query])
+    >>> cenia.getrecords2([praha_and_wms], esn='full')
+    >>> cenia.results
+    {'matches': 351, 'nextrecord': 11, 'returned': 10}
+    >>> for recid in cenia.records:
+    ...     record = cenia.records[recid]
+    ...     print record.title, record.bbox.minx, record.bbox.miny, record.bbox.maxx, record.bbox.maxy
+    ...
+    ÚP VÚC Adršpach 48.20735042 11.86320935 51.37551609 19.0302868
+    VÚC Hradecko-Pardubické aglomerace 48.20735042 11.86320935 51.37551609 19.0302868
+    ÚP VÚC okresu Jičín 48.23303412 11.93768841 51.35407571 18.95542894
+    ÚP VÚC Krkonoše 48.20735042 11.86320935 51.37551609 19.0302868
+    ÚP VÚC Orlické hory a podhůří 48.20735042 11.86320935 51.37551609 19.0302868
+    ÚP VÚC Trutnovsko - Náchodsko 48.20735042 11.86320935 51.37551609 19.0302868
+    Prognóza rozvoje území kraje 48.20735042 11.86320935 51.37551609 19.0302868
+    WMS služba Pardubického kraje - polohopis, ortofoto 48.11130361 11.83822588 51.45351762 19.12784541
+    Služba WMS Pardubického kraje - tematické vrstvy 48.22866996 12.03230308 51.34271802 19.63025648
+    Letecká dopravní síť 48.55 12.09 51.06 18.86
+    >>>
+
+Vlastnosti záznamu:
+
+.. code-block:: python
+
+    >>> zm10 = cenia.records['CZ-CUZK-WMS-ZM10-P']
+    >>> zm10.type
+    'service'
+    >>> print zm10.title
+    Prohlížecí služba WMS - ZM 10
+    >>> >>> print zm10.abstract
+    Prohlížecí služba WMS-ZM10-P je poskytována jako veřejná prohlížecí
+    služba nad daty Základní mapy ČR 1:10 000.  Služba splňuje Technické
+    pokyny pro INSPIRE prohlížecí služby v. 3.11 a zároveň splňuje
+    standard OGC WMS 1.1.1. a 1.3.0.
+    >>> zm10_url = zm10.references[0]['url']
+    'http://geoportal.cuzk.cz/WMS_ZM10_PUB/WMService.aspx?service=WMS&request=getCapabilities'
+    >>>
 
 
 .. _OWSLibWMS:
@@ -80,6 +155,47 @@ OGC WMS
 .. index::
     single: WMS
     single: OGC OWS
+
+`OGC Web Map Service <http://opengeospatial.org/standards/wms>`_ slouží ke
+stahování a sdílení mapových dat. Ke klientovi nejsou posílána vlatní data, ale
+pouze náhled (obrázek) těchto dat.
+
+.. code-block:: python
+
+    >>> from owslib.wms import WebMapService
+    >>> zm10_wms = WebMapService(zm10_url)
+    >>> print zm10_wms.identification.title
+    Prohlížecí služba WMS - ZM 10
+    >>> print zm10_wms.identification.abstract
+    Prohlížecí služba WMS-ZM10-P je poskytována jako veřejná prohlížecí
+    služba nad daty Základní mapy ČR 1:10 000.
+    >>> print zm10_wms.provider.name
+    Zeměměřický úřad
+    >>> print zm10_wms.provider.contact.address
+    Pod Sídlištěm 9
+
+Dostupné mapové vrstvy
+
+.. code-block:: python
+
+    >>> zm10_wms.contents
+    {'GR_ZM10': <owslib.wms.ContentMetadata instance at 0x7f1d7bc1b8c0>}
+    >>> zm10_wms.contents['GR_ZM10'].boundingBox
+    (-950003.175021186, -1250003.1750036045, -399990.474995786, -899996.8249909044, 'EPSG:5514')
+    >>> zm10_wms.contents['GR_ZM10'].boundingBoxWGS84
+    (11.214011580382529, 47.96491460125967, 19.40766262309513, 51.691664934538636)
+
+Stažení a uložení dat
+
+.. code-block:: python
+
+    >>> img = zm10_wms.getmap(layers=['GR_ZM10'],
+        size=[800, 600],
+        bbox=[-950003.175021186, -1250003.1750036045, -399990.474995786, -899996.8249909044],
+        format="image/png")
+    >>> out = open('zm10.png', 'w')
+    >>> out.write(img.read())
+    >>> out.close()
 
 .. _OWSLibWFS:
 
@@ -95,6 +211,7 @@ OGC WFS
     >>> from owslib import wfs as webfeatureservice
     >>> aopk = webfeatureservice.WebFeatureService('https://gis.nature.cz/arcgis/services/UzemniOchrana/ChranUzemi/MapServer/WFSServer?')
     >>>
+
 
 Capabilities
 
