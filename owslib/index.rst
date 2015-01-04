@@ -105,7 +105,7 @@ boxem na oblast Prahy:
 
 .. code-block:: python
 
-    >>> from owslib.fes import PropertyIsLike, BBox, And
+    >>> from owslib.fes import PropertyIsLike, BBox, And, PropertyIsEqualTo
     >>> wms_query = PropertyIsEqualTo('csw:AnyText', 'WMS')
     >>> praha_query = BBox([14.22,49.94,14.71,50.18])
     >>> praha_and_wms = And([praha_query, wms_query])
@@ -206,11 +206,53 @@ OGC WFS
     single: WFS
     single: OGC OWS
 
+Služba `OGC Web Feature Service <http://opengeospatial.org/standards/wfs`_ slouží ke
+stahování a sdílení vektorových dat. Nejčastějším výměnným formátem je `OGC GML
+<http://opengeospatial.org/standards/gml>`_.
+
+.. note:: Předpokládáme, že máme naimportováno vše potřebné pro práci s
+    katalogovou službou, pokud ne, vraťte se prosím výše, viz :ref:`OWSLibCSW`.
+
+Nejprve najdeme nějaké WFS v katalogové službě:
+
+.. code-block:: python
+
+    >>> wfs_query = PropertyIsLike('csw:AnyText', 'WFS')
+    >>> aopk_query = PropertyIsLike('csw:AnyText', 'AOPK')
+    >>> service_query = PropertyIsLike('apiso:type', 'service')
+    >>> aopk_and_wfs_and_service = And([aopk_query, wfs_query, service_query])
+    >>> cenia.getrecords2([aopk_and_wfs], esn='full')
+    >>> cenia.results
+    {'matches': 6, 'nextrecord': 0, 'returned': 6}
+    >>>
+    >>> for recid in cenia.records:
+    ...     record = cenia.records[recid]
+    ...     print recid, record.title
+    ... 
+    53e37222-89a0-472b-9781-5bfc0a02080a WFS Soustava území Natura 2000
+    53e37cd6-5cb8-4ee9-b862-62e10a02080a WFS Památné stromy
+    5473579f-fb08-48ab-893d-3d3e0a02080a WFS Chráněná území
+    54735935-a88c-4c58-99bc-3dee0a02080a WFS Mezinárodní ochrana přírody
+    53e47f1f-1bb8-405f-9254-514a0a02080a WFS Údaje o území
+    53f3708e-9d1c-4da6-983c-086e0a02080a WFS Průchodnost krajiny pro velké savce
+
+Podíváme se, jakápak data mají v Agentůře ochrany přírody a krajiny:
+
+.. code-block:: python
+
+    >>> natura = cenia.records['53e37222-89a0-472b-9781-5bfc0a02080a']
+    >>> print natura.abstract
+    Služba zpřístupňuje geografická data soustavy území Natura 2000 v České republice; © AOPK ČR
+
+    >> print natura.identifiers[1]
+    https://gis.nature.cz/arcgis/services/UzemniOchrana/Natura2000/MapServer/WFSServer?service=WFS&request=GetCapabilities&version=1.1.0
+
+
 .. code-block:: python
 
     >>> from owslib import wfs as webfeatureservice
-    >>> aopk = webfeatureservice.WebFeatureService('https://gis.nature.cz/arcgis/services/UzemniOchrana/ChranUzemi/MapServer/WFSServer?')
-    >>>
+    >>> aopk = webfeatureservice.WebFeatureService('https://gis.nature.cz/arcgis/services/UzemniOchrana/Natura2000/MapServer/WFSServer?service=WFS&request=GetCapabilities&version=1.1.0', version='1.1.0')
+    >>> 
 
 
 Capabilities
@@ -219,19 +261,19 @@ Capabilities
 
     >>> capabilities = aopk.getcapabilities()
     >>> capabilities.geturl()
-    'https://gis.nature.cz/arcgis/services/UzemniOchrana/ChranUzemi/MapServer/WFSServer?service=WFS&request=GetCapabilities&version=1.0.0'
+    'https://gis.nature.cz/arcgis/services/UzemniOchrana/Natura2000/MapServer/WFSServer?service=WFS&request=GetCapabilities&version=1.1.0'
     >>>
-    >>> aopk.provider.name
-    'ChranUzemi'
+    print aopk.provider.name
+    Agentura ochrany přírody a krajiny České republiky
     >>>
     >>> print aopk.identification.title
-    Chráněná území
+    Soustava chráněných území evropského významu Natura 2000
     >>> print aopk.identification.keywords[0]
-    Chráněné území
+    Natura 2000, Chráněné území
     >>> print aopk.identification.fees
     žádné
     >>> print aopk.identification.abstract
-    Služba zpřístupňuje geografická data zvláště a smluvně chráněných území v České republice
+    Služba zpřístupňuje geografická data soustavy chráněných území evropského významu Natura 2000 v České republice
 
 Metadata
 --------
