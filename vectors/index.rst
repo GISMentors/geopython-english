@@ -6,10 +6,11 @@ Pro práci s vektorovými daty v jazyce Python je tradiční knihovna `OGR
 `Shapely <http://toblerity.org/shapely/>`_ a především knihovna `Fiona
 <http://toblerity.org/fiona/>`_. 
 
-V tomto kurzu se zaměříme na knihovnu Fiona a OGR. Fiona je projekt programátora
-Seana Gilliese, který vytvořil vlastní aplikační rozhraní ke knihovně OGR, které
-více odpovídá standardům jazyka Python. OGR je z tohoto pohledu více
-nízkoúrovňová knihovna, pomocí které lze provádět více nízkoúrovňovné operace.
+Zaměříme se na knihovny Fiona a OGR. Fiona je projekt programátora
+`Seana Gilliese <http://sgillies.net/>`_, který vytvořil vlastní aplikační
+rozhraní ke knihovně OGR, které více odpovídá standardům a postupům z jazyka
+Python. OGR je z tohoto pohledu více nízkoúrovňová knihovna, pomocí které lze
+provádět více nízkoúrovňovné operace.
 
 V průběhu kurzu načteme a zpracujeme data, se kterými se lze v České republice
 běžně setkat, zejména data z registru RUIAN.

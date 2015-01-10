@@ -7,11 +7,13 @@ OGR pracuje s konceptem vrstev v datových zdrojích:
 
 * *Data Source* (soubor, databáze, ...)
 
-    * *[Layer]* (obsah souboru, tabulka, ...)
+    * *[Layer]* (obsah souboru, tabulka databáze, ...)
 
-      * *[Feature]* (vzhledy jevu)
+      * *[Feature]* -- vektorové objekty
         
-        * *[Field, Geometry]*
+        * *[Field, Geometry]* -- atributy, geometrie
+
+Otevření souboru:
 
 .. code-block:: python
 
@@ -23,7 +25,7 @@ OGR pracuje s konceptem vrstev v datových zdrojích:
     1
     >>>
 
-Práce s vrstvou
+Práce s vrstvou, její otevření:
 
 .. code-block:: python
 
@@ -33,7 +35,7 @@ Práce s vrstvou
     >>> l.GetFeatureCount()
     5626
 
-Schema
+Schéma vrstvy -- definice typu geometrie a jednotlivých atributových polí:
 
 .. code-block:: python
 
@@ -43,11 +45,11 @@ Schema
     True
     >>> l.schema
     [<osgeo.ogr.FieldDefn; proxy of <Swig Object of type 'OGRFieldDefnShadow *' at 0x7f98d80fa9f0> >, <osgeo.ogr.FieldDefn; proxy of <Swig Object of type 'OGRFieldDefnShadow *' at 0x7f98d80fa8...
-    >>> 
+    >>>
     >>> l.schema[4].name
     'NAZEV'
 
-Vzhledy jevu
+Vzhledy jevu (prvky datové sady):
 
 .. code-block:: python
 
@@ -59,7 +61,7 @@ Vzhledy jevu
     ...
     >>>
 
-Geometrie
+Geometrie prvků:
 
 .. code-block:: python
 
@@ -77,11 +79,16 @@ Geometrie
     >>> geom.Intersects(buff)
     True
 
-A od začátku (co ve Fioně nebylo a jde to tam 3× jednoduššeji) ...
+V následujícím příkladu si předvedeme, jak pracovat s vektorovým souborem *od A
+do Z*, tedy jeho otevření, zjištění některých metadat, změna atributu některého
+prvku, uložení souboru. To celé by šlo pravdepodobně vykonat pomocí výše zmíněné
+knihovny Fiona přibližně 3× jednoduššeji. OGR přistupuje k souboru na poněkud
+nižší úrovi, což může být někdy výhodnější.
 
 .. code-block:: python
 
     >>> from osgeo import osr
+    >>> # Vytvoření driveru pro formát GML a vytvoření prázdného souboru
     >>> drv = ogr.GetDriverByName('GML')
     >>> ds = drv.CreateDataSource('/tmp/out.gml')
     >>> srs = osr.SpatialReference()
@@ -89,15 +96,21 @@ A od začátku (co ve Fioně nebylo a jde to tam 3× jednoduššeji) ...
     >>> srs.ExportToProj4()
     '+proj=krovak +lat_0=49.5 +lon_0=24.83333333333333 +alpha=30.28813972222222 +k=0.9999 +x_0=0 +y_0=0 +ellps=bessel +towgs84=...
     >>> layer = ds.CreateLayer('out.gml', srs, ogr.wkbLineString)
-    >>> 
+    >>>
+
+    >>> # Vytvoření nového atributu se jménem 'Name' typu 'string'
     >>> field_name = ogr.FieldDefn('Name', ogr.OFTString)
     >>> field_name.SetWidth(24)
     >>> field_number = ogr.FieldDefn('Number', ogr.OFTInteger)
     >>> layer.CreateField(field_name)
     >>> layer.CreateField(field_number)
-    >>> 
+    >>>
+
+    >>> # Vytvoření nové geometrie typu linie - načtením z formátu WKT
     >>> line = ogr.CreateGeometryFromWkt('LINESTRING(%f %f, %f %f)' % (0, 0, 1, 1))
     >>>
+
+    >>> # Vytvoření nového prvku, nastavení geometrie a atributu Name
     >>> feature = ogr.Feature(layer.GetLayerDefn())
     >>> feature.SetGeometry(line)
     >>> feature.SetField("Name", 'Jméno')
