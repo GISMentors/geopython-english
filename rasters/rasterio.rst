@@ -30,86 +30,58 @@ metadata:
     (791, 718)
     >>> src.res
     (300.0379266750948, 300.041782729805)
-    
 
-    >>> (r, g, b) = src.read()
+.. figure:: rgb.png
+    :alt: RGB obrázek
 
+    Výsledný soubor s NDVI indexem
 
-##########################################################################
-##########################################################################
-##########################################################################
-Vytvoření rastru z pole hodnot
+Načtení barevných kanálů:
 
 .. code-block:: python
 
-    >>> from osgeo import gdal, ogr, osr
+    >>> data = src.read()
+    >>> len(data)
+    3
 
-    >>> # Define pixel_size and NoData value of new raster
-    >>> pixel_size = 20
-    >>> NoData_value = -9999
+Vidíme, že v rastru jsou obsaženy tři barevné kanály. Vytvoříme nyní nový
+soubor, obsahující pokus o index NDVI.
 
-    >>> # Filename of input OGR file
+.. note:: `Normalizovaný vegetační index
+    <http://en.wikipedia.org/wiki/Normalized_Difference_Vegetation_Index>`_ je poměr
+    mezi viditelnou červenou barvou a blízkou infra červenou barvou ve snímku
+    dálkového průzkumu Země.
 
-    >>> # Filename of the raster Tiff that will be created
-    >>> raster_fn = 'test.tif'
+    .. math::
+        
+         NDVI = (NIR - VIS) / (NIR  + VIS)
 
-    >>> # Open the data source and read in the extent
-    >>> x_min, x_max, y_min, y_max = (0, 100, 0, 100)
+    Protože ale v našem příkladovém souboru není blízký infrared kanál
+    viditelný, použijeme poměr mezi zeleným a červeným kanálem.
 
-    >>> # Create the destination data source
-    >>> x_res = int((x_max - x_min) / pixel_size)
-    >>> y_res = int((y_max - y_min) / pixel_size)
-    >>> target_ds = gdal.GetDriverByName('GTiff').Create(raster_fn, x_res, y_res, 1, gdal.GDT_Byte)
-    >>> target_ds.SetGeoTransform((x_min, pixel_size, 0, y_max, 0, -pixel_size))
-    >>> band = target_ds.GetRasterBand(1)
-    >>>
-    >>> import numpy as np
-    >>> band.WriteArray(np.array([[0, 0, 0, 0, 0],
-    ...                  [0, 10, 15, 10, 0],
-    ...                  [0, 15, 25, 15, 0],
-    ...                  [0, 10, 15, 10, 0],
-    ...                  [0, 0, 0, 0, 0]]))
-    >>>
-    >>> outRasterSRS = osr.SpatialReference()
-    >>> outRasterSRS.ImportFromEPSG(3857)
-    >>> target_ds.SetProjection(outRasterSRS.ExportToWkt()) # !!! jiné než u vektorů
-    >>> band.FlushCache()
-
- Rasterizace vektoru
+Neprve vytvoříme nové pole pro výsledné hodnoty, následně do tohoto pole uložíme
+výsledek výpočtu pro každý pixel. Pracujeme vlastně v prostředí NumPy, které
+práci s poli významně usnadňuje.
 
 .. code-block:: python
 
-    >>> # -*- coding: utf-8 -*-
-    >>> from osgeo import gdal, ogr, osr
-    >>> 
-    >>> # Define pixel_size and NoData value of new raster
-    >>> pixel_size = 50
-    >>> NoData_value = -9999
-    >>> 
-    >>> # Filename of input OGR file
-    >>> 
-    >>> # Filename of the raster Tiff that will be created
-    >>> raster_fn = 'test3.tif'
-    >>> 
-    >>> # Filename of input OGR file
-    >>> vector_fn = 'chko.shp'
-    >>> 
-    >>> source_ds = ogr.Open(vector_fn)
-    >>> source_layer = source_ds.GetLayer()
-    >>> 
-    >>> # Open the data source and read in the extent
-    >>> x_min, x_max, y_min, y_max = source_layer.GetExtent()
-    >>> 
-    >>> # Create the destination data source
-    >>> x_res = int((x_max - x_min) / pixel_size)
-    >>> y_res = int((y_max - y_min) / pixel_size)
-    >>> target_ds = gdal.GetDriverByName('GTiff').Create(raster_fn, x_res, y_res, 3, gdal.GDT_Byte)
-    >>> target_ds.SetGeoTransform((x_min, pixel_size, 0, y_max, 0, -pixel_size))
-    >>> 
-    >>> outRasterSRS = osr.SpatialReference()
-    >>> outRasterSRS.ImportFromEPSG(5514)
-    >>> target_ds.SetProjection(outRasterSRS.ExportToWkt()) # !!! jiné než u vektorů
-    >>> 
-    >>> gdal.RasterizeLayer(target_ds, [1, 2, 3], source_layer, burn_values=[255,125,0], options=['ALL_TOUCHED=TRUE'])
-    >>> 
-    >>> print target_ds.GetRasterBand(1).Checksum()
+    >>> (nir, vis) = (data[0], data[1])
+    >>> ndvi = (nir - vis) / (nir + vis)
+
+Výsledek uložíme do nově vytvořeného souboru. Data budou zkomprimována pomocí
+LWZ komprese a uložena v číselném formátu `uint8`. Počet kanálů bude 1.
+
+.. code-block:: python
+
+    >>> kwargs = src.meta
+    >>> kwargs.update(
+        dtype=rasterio.uint8,
+        count=1,
+        compress='lzw')
+    >>> with rasterio.open('ndvi.tif', 'w', **kwargs) as dst:
+            dst.write_band(1, ndvi.astype(rasterio.uint8))
+
+.. figure:: ndvi.png
+    :alt: Index NDVI
+
+    Výsledný soubor s NDVI indexem
