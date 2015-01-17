@@ -1,3 +1,5 @@
+.. _ogr:
+
 Vektory a OGR
 =============
 
