@@ -17,6 +17,8 @@ Fiona je vhodná na binární souborové formáty dat. Kde pracujete s daty
 (Geo)JSON, používejte balíček **json**. Kde pracujete s daty v databázích,
 používejte jejich knihovny. 
 
+**Dokumentace:** http://toblerity.org/fiona/manual.html
+
 .. todo:: Platí pro gdal 1.11, blbnou vrstvy
 
 Nejprve je potřeba vytvořit tvz. *kolekci* prvků

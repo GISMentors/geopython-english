@@ -56,7 +56,7 @@ GeoPython
 Fóra, dokumentace
 """""""""""""""""
 
-* The GIS Stack Exchange: http://gis.stackexchange.com/
+* The GIS Stack Exchange: http://gis.stackexchange.com/ (http://gis.stackexchange.com/?tags=python)
 * Last but not least, https://www.google.com/
 
 
@@ -66,6 +66,7 @@ Obsah
 .. toctree::
    :maxdepth: 2
 
+   uvod
    owslib/index
    vectors/index
    pyproj/index

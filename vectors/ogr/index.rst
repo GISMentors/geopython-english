@@ -3,19 +3,35 @@
 Vektory a OGR
 =============
 
-OGR  (součást GDAL) je tradiční knihovna pro práci s vektorovými daty.
+OGR  (součást knihovny GDAL) je tradiční knihovna pro práci s vektorovými daty.
+Knihovna OGR slouží především k převodům mezi vektorovými formáty (ale i další
+práci s vektorovými daty, jejich geometrií a atributy), kterých umí na 80. 
 
-OGR pracuje s konceptem vrstev v datových zdrojích:
+OGR pracuje s konceptem vrstev v datových zdrojích. OGR vytváří nad všemi
+vektorovými formáty svůj abstraktní model, který se může jevit jak těžkopádný,
+nicméně spolehlivě funguje pro všechny případy.:
 
 * *Data Source* (soubor, databáze, ...)
 
     * *[Layer]* (obsah souboru, tabulka databáze, ...)
 
-      * *[Feature]* -- vektorové objekty
+      * *[Feature]* -- vektorové objekty (vzhledy jevu)
         
         * *[Field, Geometry]* -- atributy, geometrie
 
-Otevření souboru:
+Rozhraní pro Python je pouze abstraktní API nad původními funkcemi a třídami z
+jazyka C++, ve kterém je GDAL/OGR naprogramovaný. Také z tohoto důvodu se mohou
+některé postupy jevit jako těžkopádné. 
+
+Dokumentace: http://www.gdal.org/ogr_apitut.html
+API: http://gdal.org/python/
+
+Buffer
+------
+V tomto příkladu si ukážeme, jak otevřít vektorový soubor, načíst jeho vrstvu,
+zobrazit atributy prvků a jak vytvořit buffer z geometrie prvku. 
+
+Nejprve otevření souboru:
 
 .. code-block:: python
 

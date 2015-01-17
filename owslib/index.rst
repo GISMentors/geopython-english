@@ -45,6 +45,8 @@ na serverovou implementaci. Knihovna momentálně podporuje standardy WMS, WFS,
 WCS, CSW, WPS, SOS, WMC a další (seznam se stále rozšiřuje).
 V této části si ukážeme práci s některými *otevřenými webovými službami OGC*.
 
+**Dokumentace**: http://geopython.github.io/OWSLib/
+
 .. _OWSLibCSW:
 
 OGC CSW
