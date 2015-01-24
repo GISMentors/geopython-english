@@ -13,5 +13,17 @@ a {
 }
 
 .header {
+    color: #fffff;
+}
+
+div.header div.rel a {
     color: #fff;
+}
+
+div.footer a {
+    color: #fff;
+}
+
+div.footer div.left a {
+    color: #fffff;
 }
