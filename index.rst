@@ -1,5 +1,5 @@
-Python-GIS
-==========
+GeoPython
+=========
 
 Motivace
 --------
