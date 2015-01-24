@@ -9,7 +9,7 @@ Motivace
     <http://trac.osgeo.org/proj/>`_, `Shapely
     <https://pypi.python.org/pypi/Shapely>`_, `Fiona
     <https://pypi.python.org/pypi/Fiona>`_, `RasterIO
-    <https://pypi.python.org/pypi/rasterio/0.16>`_, `MapServer Python
+    <https://pypi.python.org/pypi/rasterio>`_, `MapServer Python
     MapScript <http://mapserver.org/mapscript/python.html>`_, `GeoServer
     gsconfig <https://pypi.python.org/pypi/gsconfig>`_, `OWSLib
     <http://geopython.github.io/OWSLib/>`_, `PyWPS

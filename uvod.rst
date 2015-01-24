@@ -1,56 +1,68 @@
 Úvod
 ====
-Python je populární programovací jazyk, který má své četné příznivce, stejně
+
+**Python** je populární programovací jazyk, který má své četné příznivce stejně
 jako zarputilé odpůrce. Oproti jiným běžně rozšířeným jazykům je jeho syntaxe
-zvláštění mimo jiné v tom, že nepoužívá závorky a bloky kódu jsou odděleny
-navzájem odsazením od levého okraje textového souboru.
+zvláštní mimo jiné v tom, že nepoužívá závorky - bloky kódu jsou odděleny
+navzájem odsazením zdrojového textu.
 
-Ve světe geografických informačních systémů je Python velice oblíbený (a můžeme
-říci, že čím dál oblíbenější). Stojí rozkročen mezi jednoduchým skriptováním v
-shellu a hard-core programováním na takřka systémové úrovni v jazyce C. Má v sobě
-něco z přístupů jazyka Java. Většina existujících knihoven a programů má pro
-tento jazyk svoje rozhraní.
+.. note:: **Příklad funkce main() v jazyku Python**
 
-S Pythonem lze ve světě GIS dojít daleko, níže uvádíme malý přehled o
-některých nástrojích a jejich napojení do jazyka Python:
+   .. code:: bash
+
+      def main():
+          print "ahoj"
+
+Ve světe geoinformačních technologií je Python velice oblíbený (a
+můžeme říci, že čím dál oblíbenější). Stojí rozkročen mezi jednoduchým
+skriptováním v shellu a pokročilým programováním na takřka systémové
+úrovni v~jazyce :wikipedia:`C <C (programovací jazyk)>`. Má v sobě
+něco i z přístupů jazyka :wikipedia:`Java <Java (programovací
+jazyk)>`. Většina existujících knihoven a programů má pro tento jazyk
+svoje rozhraní, jako příklad můžeme uvést `GDAL Python API
+<http://gdal.org/python/>`_.
+
+S Pythonem lze ve světě GIS dojít daleko, níže uvádíme malý přehled
+vybraných nástrojů a jejich napojení na jazyk Python:
 
 **Desktop**
-    * *GRASS GIS* 
-    * *QGIS*
-    * *ArcGIS*
+    * *GRASS GIS*: http://grass.osgeo.org
+    * *QGIS*: http://qgis.org
+    * *ArcGIS*: http://www.arcgis.com
 
-**Server**
-    * *MapServer*
-    * *GeoServer*
-    * *TileStache*
-    * *PyWPS*
-    * *GeoDjango*
+**Web**
+    * *MapServer*: http://mapserver.org
+    * *GeoServer*: http://geoserver.org
+    * *TileCache*: http://tilecache.org
+    * *PyWPS*: http://pywps.wald.intevation.org
+    * *GeoDjango*: http://geodjango.org
 
 **Knihovny a nástroje**
-    * *GDAL/OGR*
-    * *Fiona* a *Rasterio*
-    * *Proj4*
-    * *R*
-    * *Shapely*
+    * *GDAL*: http://gdal.org
+    * *Fiona*: https://pypi.python.org/pypi/Fiona
+    * *Rasterio*: <https://pypi.python.org/pypi/rasterio
+    * *Proj4*: http://trac.osgeo.org/proj
+    * *R (rpy2)*: http://rpy.sourceforge.net
+    * *Shapely*: https://pypi.python.org/pypi/Shapely
 
 **Databáze**
-    * *PostgreSQL* a *PostGIS*
-    * *SQLite*
-    * *GeoAlchemy*
+    * *PostGIS*: http://postgis.net
+    * *SpatiaLite*: https://www.gaia-gis.it/fossil/libspatialite/index
+    * *GeoAlchemy*: http://geoalchemy.org
 
 **Specializované nástroje**
-    * *TopoJSON* https://github.com/calvinmetcalf/topojson.py
-    * *RTree index* https://github.com/Toblerity/rtree
+    * *TopoJSON*: https://github.com/calvinmetcalf/topojson.py
+    * *RTree index*: https://github.com/Toblerity/rtree
 
 Seznam samozřejmě není úplný a konečný.
 
-V tomto kurzu se zaměříme na úvod do práce se základními knihovnami GDAL/OGR,
-seznámíme se s jejich nadstavbami Rasterio a Fiona, podíváme se na práci s
-knihovnou pro webové služby OGC OWSLib a nakonec se podíváme na serverové
-aplikace pomocí rozhraní python-mapscript a gsconfig.
+V tomto kurzu se zaměříme na úvod do práce s knihovnou **GDAL** a
+jejími nadstavbami **Rasterio** a **Fiona**. Vyzkoušíme si na práci s
+knihovnou pro webové služby OGC **OWSLib** a nakonec se podíváme na
+serverové aplikace pomocí rozhraní **python-mapscript** a **gsconfig**.
 
-Cílem kurzu přirozeně není kompletní opanování problematiky GIS a jazyka Python.
-Cílem je poskytnout přehled o nejčastěji používanýc základních nástrojích, nad
+Cílem kurzu přirozeně není kompletní pokrytí problematiky GIS a jazyka Python.
+Cílem je poskytnout přehled o nejčastěji používaných základních nástrojích, nad
 kterými lze stavět další aplikace. Tyto nástroje jsou ve své většině používány i
 dalšími programy a knihovnami a proto je dobré o nich vědět a chápat jejich
 principy.
