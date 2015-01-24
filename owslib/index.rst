@@ -137,6 +137,9 @@ Vlastnosti záznamu:
 
 .. code-block:: python
 
+
+    >>> zm_query = PropertyIsEqualTo('csw:AnyText', 'ZM10')
+    >>> cenia.getrecords2([zm_query], esn='full')
     >>> zm10 = cenia.records['CZ-CUZK-WMS-ZM10-P']
     >>> zm10.type
     'service'
