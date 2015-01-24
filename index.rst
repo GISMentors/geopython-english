@@ -1,66 +1,49 @@
-GeoPython
-=========
-
 Motivace
---------
-* Python je dnes asi nejvíce geo-pozitivní programovací jazyk
-* Python baví
-* Množstí knihoven a nástrojů (GDAL, PROJ4, Shapely, Fiona, RasterIO, MapServer,
-  gsconfig, OWSLib, PyWPS, pycsw, ...)
-* Podpora v deskopech (GRASS GIS, ArcGIS, QGIS, ...) 
-* Python se neučí, Python se píše
+========
 
-Pracovní prostředí 
-------------------
+* Python baví
+* Python se neučí, Python se píše
+* :wikipedia:`Python` je dnes asi nejvíce "geopozitivní" programovací jazyk
+    
+  * Množství knihoven a nástrojů (`GDAL <http://gdal.org>`_, `PROJ4
+    <http://trac.osgeo.org/proj/>`_, `Shapely
+    <https://pypi.python.org/pypi/Shapely>`_, `Fiona
+    <https://pypi.python.org/pypi/Fiona>`_, `RasterIO
+    <https://pypi.python.org/pypi/rasterio/0.16>`_, `MapServer Python
+    MapScript <http://mapserver.org/mapscript/python.html>`_, `GeoServer
+    gsconfig <https://pypi.python.org/pypi/gsconfig>`_, `OWSLib
+    <http://geopython.github.io/OWSLib/>`_, `PyWPS
+    <http://pywps.wald.intevation.org/>`_, `pycsw <http://pycsw.org/>`_,
+    ...)
+  * Podpora v deskopech (GRASS GIS - `PyGRASS
+    <http://grass.osgeo.org/grass71/manuals/libpython/pygrass_index.html>`_,
+    Esri ArcGIS - `arcpy
+    <http://resources.arcgis.com/en/help/main/10.1/index.html#//000v000000v7000000>`_,
+    QGIS - `PyQGIS
+    <http://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/plugins.html>`_,
+    ...)
+
+Pracovní prostředí
+==================
+
 * OSGeo Live:
   http://live.osgeo.org/en/index.html
-* Data archive:
-  https://github.com/GISMentors/dataset
-* Jednotlivé kroky
-  https://github.com/gismentors/pygis/tree/master/kurz
-
 * Nastavení
+
+  .. code:: bash
+
+            sudo apt-get install gedit gedit-plugins
+            cd ~/Desktop
+
+* Geodata:
     
-    sudo apt-get install gedit gedit-plugins
-    cd ~/Desktop
-
-* Stažení dat RUIAN
-  http://46.28.111.140/gismentors/skoleni/geodata/ruian/
-
-
-Další čtení
------------
-
-Python
-""""""
-
-* Učebnice jazyka Python (česky): http://www.root.cz/knihy/ucebnice-jazyka-python/
-* Python guide: http://docs.python-guide.org/en/latest/
-* Resources for learning Python:
-  http://docs.python-guide.org/en/latest/intro/learning.html
-
-
-GeoPython
-"""""""""
-
-* **Python GDAL/OGR Cookbook** http://pcjericks.github.io/py-gdalogr-cookbook/
-* Shapely manual: http://toblerity.github.io/shapely/manual.html
-* PostGIS: http://postgis.net/
-* GDAL: http://www.gdal.org/
-* "Python Geospatial Development" book, Erik Westra:
-  http://www.packtpub.com/python-geospatial-development/book
-  (2nd edition just out)
-
-
-Fóra, dokumentace
-"""""""""""""""""
-
-* The GIS Stack Exchange: http://gis.stackexchange.com/ (http://gis.stackexchange.com/?tags=python)
-* Last but not least, https://www.google.com/
-
+  * Datové sady:
+    https://github.com/GISMentors/dataset
+  * Předpřipravené data RÚIAN:
+    http://training.gismentors.eu/geodata/ruian/
 
 Obsah
------
+=====
 
 .. toctree::
    :maxdepth: 2
@@ -71,3 +54,54 @@ Obsah
    pyproj/index
    rasters/index
    mapscript/index
+
+Další čtení
+===========
+
+Python
+------
+
+* Učebnice jazyka Python (česky): http://www.root.cz/knihy/ucebnice-jazyka-python
+* Python guide: http://docs.python-guide.org/en/latest
+* Dive into Python: http://www.diveintopython.net
+
+
+GeoPython
+---------
+
+* **Python GDAL/OGR Cookbook**: http://pcjericks.github.io/py-gdalogr-cookbook/
+* Shapely manual: http://toblerity.github.io/shapely/manual.html
+* "Python Geospatial Development" book, Erik Westra:
+  http://www.packtpub.com/python-geospatial-development/book
+
+Fóra, dokumentace
+-----------------
+
+* The GIS Stack Exchange: http://gis.stackexchange.com/ (http://gis.stackexchange.com/?tags=python)
+* Last but not least, https://www.google.com
+
+Licence dokumentu
+=================
+
+Text školení je licencován pod `Creative Commons Attribution-ShareAlike 4.0 International License <http://creativecommons.org/licenses/by-sa/4.0/>`_.
+
+.. figure:: images/cc-by-sa.png 
+   :width: 130px
+   :scale-latex: 100
+              
+*Verze textu školení:* |release| (|today|)
+
+Autoři
+------
+
+Za `GISMentors <http://www.gismentors.eu/>`_:
+
+* Jáchym Čepický ``<jachym.cepicky opengeolabs.cz>``
+* Martin Landa ``<martin.landa opengeolabs.cz>``
+    
+.. only:: latex
+
+   Online HTML verze textu školení je dostupná na adrese: http://training.gismentors.eu/geopython/
+
+Zdrojové texty školení jsou dostupné na adrese: https://github.com/GISMentors/geopython
+

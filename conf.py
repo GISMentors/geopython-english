@@ -7,7 +7,7 @@ import os
 
 # General information about the project.
 project = u'Školení GeoPython'
-copyright = u'2014, Jáchym Čepický (GISMentors.eu)'
+copyright = u'2014, Jáchym Čepický a Martin Landa (GISMentors.eu)'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
