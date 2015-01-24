@@ -5,7 +5,7 @@ Načítán dat pomocí webových služeb OGC
 
 `Open Geospatial Consortium <http://opengeospatial.org>`_ (OGC) je mezinárodní
 standardizační organizace. Její členové se zabývají vývojem a údržbou standardů
-pro prostorová data a služby. Mezi známá standardy patří formát `Geography
+pro prostorová data a služby. Mezi nejznámnější OGC standardy patří formát `Geography
 Markup Language <http://opengeospatial.org/standards/gml>`_, `Keyhole Markup
 Language <http://opengeospatial.org/stanards/kml>`_ a tzv. *Otevřené webové
 služby* (OGC OWS), mezi které patří `Web Mapping Service (OGC WMS)
@@ -13,34 +13,37 @@ služby* (OGC OWS), mezi které patří `Web Mapping Service (OGC WMS)
 <http://opengeospatial.org/standards/wfs>`_, `Web Coveradge Service (OGC WCS)
 <http://opengeospatial.org/standards/wcs>`_ a další.
 
-Standardy OGC OWS jsou postaveny na komunikaci mezi serverem a klientem
-(*client-server protocol*) kdy klient (váš počítač) posílá serveru (počítači, ze
-kterého chcete získat data či na něm spusit službu) požadavky a server odpovídá
+Standardy OGC OWS jsou postaveny na komunikaci mezi serverem a
+klientem (:wikipedia:`client-server protocol <Klient-server>`) kdy
+klient (váš počítač) posílá serveru (počítači, ze kterého chcete
+získat data či na něm spusit službu) požadavky. Server odpovídá
 prostřednictvím souboru ve formátu XML. Požadavek může mít buď podobu
-speciálního URL, kdy jednotlivé paramery jsou od sebe odděleny znakem `&`,
-například::
+speciálního URL, kdy jednotlivé paramery jsou od sebe odděleny znakem
+``&``, například::
 
     http://server/služba/request=GetCapabilies&service=WMS
 
-(posíláme 2 parametry: `request` má hodnotu `GetCapabilities` a parametr
-`service` má hodnotu `WMS`)
+V tomto případě posíláme 2 parametry: ``request`` má hodnotu
+``GetCapabilities`` a parametr ``service`` má hodnotu ``WMS``.
 
-Další možností je poslat serveru požadavek také jako soubor ve formátu XML,
-například::
+Další možností je poslat serveru požadavek jako soubor ve formátu XML,
+například:
 
-    <wps:GetCapabilities xmlns:wps="http://www.opengis.net/wps/1.0.0" ...>
+.. code-block:: xml
+   
+   <wps:GetCapabilities xmlns:wps="http://www.opengis.net/wps/1.0.0" ...>
         <ows:Identifier>Buffer</ows:Identifier>
-    </wps:Execute> 
+   </wps:Execute> 
 
 Práce s těmito dotazy a zpracovávání odpovědí může být komplikovaná. Jednotlivé
-zápisy se liší každou verzi standardů. Také proto vznikla knihovna OWSLib, která
+zápisy se liší každou verzi standardů. Také proto vznikla knihovna *OWSLib*, která
 život programátorů značně usnadňuje.
 
 OWSLib
 ======
 Knihovna `OWSLib <http://geopython.github.io/OWSLib/>`_ je rozhraní z jazyka
-Python pro otevřené webové služby OGC *OGC OWS*. Knihovna umožňuje připojit se k
-různým službám a pracovat s nimi z pozice *klienta* těchto služeb, bez ohledu
+Python pro otevřené webové služby *OGC OWS*. Knihovna umožňuje se připojit k
+různým službám a pracovat s nimi z pozice *klienta* a to bez ohledu
 na serverovou implementaci. Knihovna momentálně podporuje standardy WMS, WFS,
 WCS, CSW, WPS, SOS, WMC a další (seznam se stále rozšiřuje).
 V této části si ukážeme práci s některými *otevřenými webovými službami OGC*.
@@ -58,16 +61,16 @@ OGC CSW
     single: Cenia
 
 Chceme-li nějakou OGC službu začít využívat, musíme především znát její adresu.
-Také pro tento účel vznikají *katalogové služby*. Speciální servery udržující
+Také pro tento účel vznikají *katalogové služby*, kdy specializované servery udržující
 metadatové záznamy webových služeb a datových souborů. Pro Českou republiku
 je organizací `Cenia <http://cenia.cz>`_ udržován `Národní geoportál INSPIRE
-<http://geoportal.gov.cz>`_, který všechy dostupné webové služby a datové
-soubory poskytované veřejnou správnou udržuje a umožňuje v nich vyhledávat
-pomocí stanardu `OGC CSW <http://opengeospatial.org/standards/csw>`.
+<http://geoportal.gov.cz>`_, který udržuje všechy dostupné webové služby a datové
+soubory poskytované veřejnou správnou a umožňuje v nich vyhledávat
+pomocí stanardu `OGC CSW <http://opengeospatial.org/standards/csw>`_.
 
 Webové rozhraní k tomuto serveru najdete na adrese
-http://geoportal.gov.cz/web/guest/catalogue-client a rozhraní pro webovou službu
-přímo nalezneme na adrese http://geoportal.gov.cz/php/micka/csw/index.php
+http://geoportal.gov.cz/web/guest/catalogue-client. Rozhraní pro webovou službu
+přímo nalezneme na adrese http://geoportal.gov.cz/php/micka/csw/index.php.
 
 .. code-block:: python
 
@@ -76,7 +79,7 @@ přímo nalezneme na adrese http://geoportal.gov.cz/php/micka/csw/index.php
     >>> cenia.servicetype
     'CSW'
 
-Vyhledávání záznamů, které jsou služba a obsahují klíčové slovo `WMS`.
+Vyhledávání záznamů, které jsou služba a obsahují klíčové slovo `WMS`:
 
 .. code-block:: python
 
@@ -102,8 +105,8 @@ Zjištění hodnot nalezených záznamů:
     Pasport obcí ÚPD Pardubického kraje - mapová služba WMS
     WMS služba Pardubického kraje - polohopis, ortofoto
 
-Vyhledávání s omezením na záznamy obsahující slovo *WMS* a s omezeným bounding
-boxem na oblast Prahy:
+Vyhledávání s omezením na záznamy obsahující slovo *WMS* a minimální
+ohraničující obdélník Prahy:
 
 .. code-block:: python
 
@@ -159,7 +162,7 @@ OGC WMS
     single: OGC OWS
 
 `OGC Web Map Service <http://opengeospatial.org/standards/wms>`_ slouží ke
-stahování a sdílení mapových dat. Ke klientovi nejsou posílána vlatní data, ale
+stahování a sdílení mapových dat. Ke klientovi nejsou posílána vlastní data, ale
 pouze náhled (obrázek) těchto dat.
 
 .. code-block:: python
@@ -176,7 +179,7 @@ pouze náhled (obrázek) těchto dat.
     >>> print zm10_wms.provider.contact.address
     Pod Sídlištěm 9
 
-Dostupné mapové vrstvy
+Dostupné mapové vrstvy:
 
 .. code-block:: python
 
@@ -187,7 +190,7 @@ Dostupné mapové vrstvy
     >>> zm10_wms.contents['GR_ZM10'].boundingBoxWGS84
     (11.214011580382529, 47.96491460125967, 19.40766262309513, 51.691664934538636)
 
-Stažení a uložení dat
+Stažení a uložení dat:
 
 .. code-block:: python
 
@@ -208,7 +211,7 @@ OGC WFS
     single: WFS
     single: OGC OWS
 
-Služba `OGC Web Feature Service <http://opengeospatial.org/standards/wfs`_ slouží ke
+Služba `OGC Web Feature Service <http://opengeospatial.org/standards/wfs>`_ slouží ke
 stahování a sdílení vektorových dat. Nejčastějším výměnným formátem je `OGC GML
 <http://opengeospatial.org/standards/gml>`_.
 
@@ -222,7 +225,7 @@ Nejprve najdeme nějaké WFS v katalogové službě:
     >>> wfs_query = PropertyIsLike('csw:AnyText', 'WFS')
     >>> aopk_query = PropertyIsLike('csw:AnyText', 'AOPK')
     >>> service_query = PropertyIsLike('apiso:type', 'service')
-    >>> aopk_and_wfs_and_service = And([aopk_query, wfs_query, service_query])
+    >>> aopk_and_wfs = And([aopk_query, wfs_query, service_query])
     >>> cenia.getrecords2([aopk_and_wfs], esn='full')
     >>> cenia.results
     {'matches': 6, 'nextrecord': 0, 'returned': 6}
@@ -238,7 +241,7 @@ Nejprve najdeme nějaké WFS v katalogové službě:
     53e47f1f-1bb8-405f-9254-514a0a02080a WFS Údaje o území
     53f3708e-9d1c-4da6-983c-086e0a02080a WFS Průchodnost krajiny pro velké savce
 
-Podíváme se, jakápak data mají v Agentůře ochrany přírody a krajiny:
+Podíváme se, jaká data mají v `Agentůře ochrany přírody a krajiny <http://www.ochranaprirody.cz/>`_ (AOPK):
 
 .. code-block:: python
 
@@ -246,18 +249,20 @@ Podíváme se, jakápak data mají v Agentůře ochrany přírody a krajiny:
     >>> print natura.abstract
     Služba zpřístupňuje geografická data soustavy území Natura 2000 v České republice; © AOPK ČR
 
-    >> print natura.identifiers[1]
-    https://gis.nature.cz/arcgis/services/UzemniOchrana/Natura2000/MapServer/WFSServer?service=WFS&request=GetCapabilities&version=1.1.0
+    >>> print natura.identifiers[1]
+    https://gis.nature.cz/arcgis/services/UzemniOchrana/Natura2000/MapServer/
+    WFSServer?service=WFS&request=GetCapabilities&version=1.1.0
 
+Načteme WFS AOPK:
 
 .. code-block:: python
 
     >>> from owslib import wfs as webfeatureservice
-    >>> aopk = webfeatureservice.WebFeatureService('https://gis.nature.cz/arcgis/services/UzemniOchrana/Natura2000/MapServer/WFSServer?service=WFS&request=GetCapabilities&version=1.1.0', version='1.1.0')
-    >>> 
+    >>> aopk = webfeatureservice.WebFeatureService('https://gis.nature.cz/arcgis/services/UzemniOchrana/' \
+    'Natura2000/MapServer/WFSServer?service=WFS&request=GetCapabilities&version=1.1.0', version='1.1.0')
 
 
-Capabilities
+Zjistíme vlastnosti služby (Capabilities):
 
 .. code-block:: python
 
@@ -278,7 +283,7 @@ Capabilities
     Služba zpřístupňuje geografická data soustavy chráněných území evropského významu Natura 2000 v České republice
 
 Metadata
---------
+""""""""
 
 .. code-block:: python
 
@@ -301,7 +306,7 @@ Metadata
     >>>
 
 Data
-----
+""""
 
 .. code-block:: python
 
@@ -312,12 +317,12 @@ Data
     "<wfs:FeatureCollection xsi:schemaLocation='https:gis.nature.cz:6443/arcgis/services/UzemniOchrana/Ch..."
 
 CUZK WFS
---------
+""""""""
 
 .. code-block:: python
 
-    >>> cuzk = webfeatureservice.WebFeatureService('http://geoportal.cuzk.cz/wfs_au/wfservice.aspx', version="2.0.0")
-    >>>
+    >>> cuzk = webfeatureservice.WebFeatureService('http://geoportal.cuzk.cz/wfs_au/wfservice.aspx',
+        version="2.0.0")
     >>> for cuzk.contents as c: print c
     ...
     gmgml:OKRES
