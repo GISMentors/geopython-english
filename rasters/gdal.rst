@@ -1,3 +1,5 @@
+.. _gdal:
+
 GDAL
 ====
 Knihovna `GDAL <http://gdal.org>`_ je základním kamenem většiny dalších projektů

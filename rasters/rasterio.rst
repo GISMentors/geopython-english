@@ -1,11 +1,11 @@
 Rasterio
 ========
 
-Knihovna `Rasterio <https://github.com/mapbox/rasterio>`_ je opět zejména `Seana
-Gilliese <http://sgillies.net/>`_, tentokrát ovšem pracoval pro firmu `MapBox
-<http://mapbox.com>`_. Rasterio pracuje s prostorovými rastrovými datovými
-sadami. Na pozadí Rasterio pracuje spolehlivá knihovna `GDAL
-<http://gdal.org>`_. 
+Knihovna `rasterio <https://github.com/mapbox/rasterio>`_ je opět dílo
+zejména `Seana Gilliese <http://sgillies.net/>`_, tentokrát v rámci
+jeho působení ve firmě `MapBox <http://mapbox.com>`_. Rasterio pracuje
+s rastrovými geografickými datovými sadami. Na pozadí Rasterio pracuje
+spolehlivá knihovna :doc:`gdal`.
 
 Rasterio pracuje s objekty knihovny `NumPy <http://www.numpy.org/>`_ (podobně
 jako dříve zmíněná Fiona pracuje s objekty JSON). Autor tvrdí, že Rasterio se
