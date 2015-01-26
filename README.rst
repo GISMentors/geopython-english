@@ -1,11 +1,18 @@
-==========
-Python-GIS
-==========
+=========
+GeoPython
+=========
+
 Vychází z workshopu `FOSS4G-CEE-2013 Python-GIS
 <https://github.com/mgax/foss4gcee2013-pygis/>`_ 
 
-Pracovní prostředí: 
-~~~~~~~~~~~~~~~~~~~
+Závislosti
+~~~~~~~~~~
+
+* https://pythonhosted.org/sphinxcontrib-aafig/
+  
+Pracovní prostředí
+~~~~~~~~~~~~~~~~~~
+
 * OSGeo Live:
   http://live.osgeo.org/en/index.html
 * Data archive:
@@ -23,9 +30,9 @@ Pracovní prostředí:
 * Kompletní výsledný program
   https://github.com/gismentors/pygis/tree/master/hikers.py
 
-
 Další čtení
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~
+
 * Učebnice jazyka Python (česky): http://www.root.cz/knihy/ucebnice-jazyka-python/
 * Python guide: http://docs.python-guide.org/en/latest/
 * Resources for learning Python:
