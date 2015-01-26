@@ -1,14 +1,50 @@
 MapScript
 =========
 
-Pythoní rozhraní k MapServeru
+Python rozhraní k `MapServeru <http://www.mapserver.org>`_ vychází z
+následujících tříd:
 
-* *Map*
+* **Map**
+* **Layer**
+* **Class**
+* **Style**
 
-  * *Layer*
+  .. aafig::
+    :aspect: 60
+    :scale: 100
 
-    * *Class*
-        * *Style*
+                                +-------+
+                                | Map   |
+                                +---+---+
+                                   / \
+                                  /   \
+                                 /     \
+                                /       \
+                               /         \
+                         +----+--+    +---+---+    +-------+
+                         | Layer |    | Layer |    | ...   |
+                         +---+---+    +-------+    +-------+
+                            / \
+                           /   \
+                          /     \
+                         /       \
+                        /         \
+                  +---+---+    +---+---+    +-------+
+                  | Class |    | Class |    | ...   |
+                  +---+---+    +-------+    +-------+
+                     / \
+                    /   \
+                   /     \
+                  /       \
+                 /         \
+            +---+---+   +---+---+   +-------+
+            | Style |   | Style |   | ...   |
+            +-------+   +-------+   +-------+
+
+Další informace: http://mapserver.org/mapscript/python.html
+            
+Ukázka
+------
 
 .. code-block:: python
 
