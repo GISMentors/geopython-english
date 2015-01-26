@@ -1,7 +1,7 @@
 .. _ogr:
 
-Vektory a OGR
-=============
+Knihovna OGR
+============
 
 OGR  (součást knihovny GDAL) je tradiční knihovna pro práci s vektorovými daty.
 Knihovna OGR slouží především k převodům mezi vektorovými formáty (ale i další

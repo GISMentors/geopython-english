@@ -1,19 +1,20 @@
-GeoPython Vektory
-=================
+Práce s vektorovými daty
+========================
 
-Pro práci s vektorovými daty v jazyce Python je tradiční knihovna `OGR
-<http://gdal.org/ogr>`_. V poslední době však začíná být populární i knihovna
-`Shapely <http://toblerity.org/shapely/>`_ a především knihovna `Fiona
-<http://toblerity.org/fiona/>`_. 
+Pro práci s vektorovými daty se v jazyce Python tradičně používá
+knihovna `GDAL/OGR <http://gdal.org>`_. V poslední době však začíná
+být populární i knihovna `Shapely <http://toblerity.org/shapely/>`_ a
+především knihovna `Fiona <http://toblerity.org/fiona/>`_.
 
-Zaměříme se na knihovny Fiona a OGR. Fiona je projekt programátora
-`Seana Gilliese <http://sgillies.net/>`_, který vytvořil vlastní aplikační
-rozhraní ke knihovně OGR, které více odpovídá standardům a postupům z jazyka
-Python. OGR je z tohoto pohledu více nízkoúrovňová knihovna, pomocí které lze
-provádět více nízkoúrovňovné operace.
+V rámci školení se zaměříme se na knihovny Fiona a OGR. Fiona je
+projekt programátora `Seana Gilliese <http://sgillies.net/>`_, který
+vytvořil vlastní aplikační rozhraní ke knihovně OGR, které více
+odpovídá standardům a postupům objektového jazyka Python. OGR je z
+tohoto pohledu knihovna, pomocí které lze provádět v porovnání s
+Fionou nízkoúrovňovné operace.
 
 V průběhu kurzu načteme a zpracujeme data, se kterými se lze v České republice
-běžně setkat, zejména data z registru RUIAN.
+běžně setkat, zejména data z~registru RÚIAN.
 
 .. toctree::
    :maxdepth: 2

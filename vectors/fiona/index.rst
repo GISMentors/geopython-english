@@ -1,27 +1,30 @@
-Vektory pomocí knihovny Fiona
-=============================
-Knihovna `Fiona <http://toblerity.org/fiona/>`_, představuje modernější způsob
-práce s vektorovými daty. Finoa je nadstavba nad knihovnou OGR. Načtená data ze
-souborů přemapovává do struktury GeoJSON a stejné struktury zapisuje zpět do
-souborů. Uživatel se nemusí zabývat kurzory, vrstvami, geometrickými operacemi a
-dalšími *odbornými* termíny.
+Knihovna Fiona
+==============
 
-Fiona není nástroj vhodný na **všechny** operace - jednoduchost práce je
-vykoupena poněkud pomalejším během kódu a omezením velikosti zpracovávaných dat.
-Tam kde OGR používá pointery, Fiona zkopíruje vektorová data do objektů jazyka
-Python, což samozřejmě vede k intenzivnějšímu využívání paměti. Pokud
-potřebujete filtrovat objekty, OGR je asi vhodnější. Pokud potřebujete zpracovat
-postupně všechny objekty, měla by být rychlejší Fiona.
+Knihovna `Fiona <http://toblerity.org/fiona/>`_ jako nadstavba nad
+knihovnou OGR představuje modernější objektově orientovaný způsob
+práce s vektorovými daty. Načtená vektorových dat knihovna přemapovává
+do struktury GeoJSON a stejné struktury zapisuje zpět do výstupních
+souborů. Uživatel se nemusí zabývat kurzory, vrstvami, geometrickými
+operacemi a dalšími *odbornými* termíny.
 
-Fiona je vhodná na binární souborové formáty dat. Kde pracujete s daty
-(Geo)JSON, používejte balíček **json**. Kde pracujete s daty v databázích,
-používejte jejich knihovny. 
+Fiona není nástroj vhodný na **všechny** operace - jednoduchost práce
+je vykoupena poněkud pomalejším během kódu a omezením velikosti
+zpracovávaných dat.  Tam kde OGR používá pointery, Fiona zkopíruje
+vektorová data do objektů jazyka Python, což samozřejmě vede k
+intenzivnějšímu využívání paměti. Pokud potřebujete filtrovat
+geoprvky, knihovna OGR je asi vhodnější. Pokud potřebujete zpracovat
+postupně všechny geoprvky ve vrstvěý, měla by být rychlejší Fiona.
+
+.. note::
+   
+   Fiona je vhodná na binární souborové formáty dat. Pro práci s daty ve
+   formátu (Geo)JSON, používejte balíček ``json``. Pro práci s daty v
+   databázích, používejte jejich vlastní knihovny.
 
 **Dokumentace:** http://toblerity.org/fiona/manual.html
 
-.. todo:: Platí pro gdal 1.11, blbnou vrstvy
-
-Nejprve je potřeba vytvořit tvz. *kolekci* prvků
+Nejprve je potřeba vytvořit tvz. *kolekci* geoprvků:
 
 .. code-block:: python
 
@@ -30,7 +33,7 @@ Nejprve je potřeba vytvořit tvz. *kolekci* prvků
     >>> chko
     <open Collection 'chko.shp:chko', mode 'r' at 0x7feea9595410>
 
-Následně můžeme zjišťovat některé vlastnosti této kolekce prvků, viz
+Následně můžeme zjišťovat některé vlastnosti této kolekce geoprvků, viz
 `dokumentace <http://toblerity.org/fiona/manual.html>`_.
 
 .. code-block:: python
@@ -41,7 +44,8 @@ Následně můžeme zjišťovat některé vlastnosti této kolekce prvků, viz
 
     # souřadnicový systém
     >>> chko.crs
-    {u'lon_0': 24.83333333333333, u'k': 0.9999, u'ellps': u'bessel', u'y_0': 0, u'no_defs': True, u'proj': u'krovak', u'x_0': 0, u'units': u'm', u'alpha': 30.28813972222222, u'lat_0': 49.5}
+        {u'lon_0': 24.83333333333333, u'k': 0.9999, u'ellps': u'bessel', u'y_0': 0, u'no_defs': True,
+         u'proj': u'krovak', u'x_0': 0, u'units': u'm', u'alpha': 30.28813972222222, u'lat_0': 49.5}
 
     # jméno souboru
     >>> chko.path
@@ -96,8 +100,8 @@ Následně můžeme zjišťovat některé vlastnosti této kolekce prvků, viz
     }
 
 
-Kolekce je především kolekce prvků. Prvky můžeme standardním postupem iterovat a
-zpracovávat je prvek po prvku. Nejprve ale jejich počet:
+Prvky uložené v kolekci můžeme standardním postupem iterovat a
+zpracovávat je prvek po prvku. Nejprve ale zjistíme jejich počet:
 
 .. code-block:: python
 
@@ -106,9 +110,11 @@ zpracovávat je prvek po prvku. Nejprve ale jejich počet:
 
 Souřadnicové systémy
 --------------------
-Na pozadí Fiony se používají nástroje GDAL/OGR, proto ani práce se souř. systémy
-není o tolik zjednodušena, jak by možná bylo potřeba. Pokud obsahuje dataset
-definici souř. systému pomocí kódu EPSG, je tento využit.
+
+Na pozadí Fiony se používají nástroje knihovny GDAL/OGR, proto ani
+práce se souřadnicovými systémy není o tolik zjednodušena, jak by
+možná bylo potřeba. Pokud obsahuje dataset definici souřadnicového
+systému pomocí kódu EPSG, je tento využit.
 
 .. code-block:: python
 
@@ -118,7 +124,7 @@ definici souř. systému pomocí kódu EPSG, je tento využit.
     >>> print(to_string(ruian.crs))
     +init=epsg:5514
 
-Při vyytvoření nového objektu s definicí souř. systému je postupováno
+Při vytvoření nového geoprvku s definicí souřadnicového systému je postupováno
 analogicky:
 
 .. code-block:: python
@@ -128,21 +134,22 @@ analogicky:
     >>> from_epsg(3857)
     {'init': 'epsg:3857', 'no_defs': True}
 
-Fiona těmito funkcemi pouze mapuje jednotlivé atributy souř. systému a stará se
-o jejich převod do textového řetězce a z textových řetězců.
+Fiona těmito funkcemi pouze mapuje jednotlivé parametry souřadnicového
+systému a stará se o jejich převod do textového řetězce a z textových
+řetězců.
 
 
 Procházní dat
 -------------
 
-Prvky v datovém souboru můžeme procházet postupně
+Prvky v datovém souboru můžeme procházet postupně:
 
 .. code-block:: python
 
     >>> for feature in ruian:
     ...     print feature['geometry']['type']
 
-Nebo si vybrat některý z prvků a dále s ním pracovat
+anebo si vybrat některý z geoprvků a dále s ním pracovat:
 
 .. code-block:: python
 
@@ -153,14 +160,16 @@ Nebo si vybrat některý z prvků a dále s ním pracovat
 Práce s daty
 ------------
 
-S jednotlivými prvky a jejich vlastnostmi můžeme dále pracovat.
+..
+ S jednotlivými prvky a jejich vlastnostmi můžeme dále pracovat.
 
-Geometrie a shapely
-^^^^^^^^^^^^^^^^^^^
+Geometrie geoprpvků a knihovna shapely
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Knihovna `shapely <http://toblerity.org/shapely/>`_ (stejného autora) nám
-umožňuje pracovat s vektorovými geometriemi opět po Pythoním způsobu. Stejně
-jako Fiona, převádí shapely geometrické vlastnosti na objekty typu JSON.
+Knihovna `shapely <http://toblerity.org/shapely/>`_ (stejného autora)
+nám umožňuje pracovat s geometrickou složkou popisu geoprvků opět ve
+stylu jazyka Python. Stejně jako Fiona, převádí shapely geometrické
+vlastnosti na objekty typu JSON.
 
 .. code-block:: python
 
@@ -171,7 +180,7 @@ jako Fiona, převádí shapely geometrické vlastnosti na objekty typu JSON.
     (-683329.1875, -993228.75, -681265.625, -991528.0)
 
 Shapely obsahuje i některé funkce pro modifikaci geometrií, například
-generalizaci, buffer nebo porovnání dvou geometrií.
+generalizaci, obalovou zónu (buffer) nebo porovnání dvou geometrií.
 
 .. code-block:: python
 
@@ -182,7 +191,7 @@ generalizaci, buffer nebo porovnání dvou geometrií.
     >>> buff.contains(poly)
     True
 
-Můžeme změnit některé vlastnosti prvků, např. upravit atribut `NAZEV`:
+Můžeme změnit některé vlastnosti geoprvků, např. upravit atribut `NAZEV`:
 
 .. code-block:: python
 
@@ -204,14 +213,14 @@ uložení do dočasného souboru na disk a následném načtení. Pokud jsme v s
 kdy tuto možnost nemáme, můžeme zkusit vyrobit virtuální objekt typu soubor a
 ten následně použít.
 
-viz kapitola o :ref:`OWSLib` a :ref:`OWSLibWFS`
+Viz kapitola o :ref:`OWSLib` a :ref:`OWSLibWFS`.
 
 .. code-block:: python
 
     [...]
     >>> f = aopk.getfeatures(['UzemniOchrana_ChranUzemi:Zonace_velkoplošného_zvláště_chráněného_území'])
 
-Špinavý trik - nažrání feature pomocí `gdal.FileFromMemBuffer` objektu
+Špinavý trik - načtení geoprvku pomocí `gdal.FileFromMemBuffer` objektu:
 
 .. code-block:: python
 
@@ -225,6 +234,6 @@ viz kapitola o :ref:`OWSLib` a :ref:`OWSLibWFS`
     >>> # a čteme
     >>> c = fiona.open('/vsimem/temp', 'r')
     >>>
-    >>> # počet prvků
+    >>> # počet geoprvků
     >>> len(c)
     3571
