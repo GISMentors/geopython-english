@@ -9,15 +9,43 @@ k převodům mezi vektorovými formáty (ale i další práci s vektorovými
 daty, jejich geometrií a atributy). V současné době knihovna podporuje
 více než 80.
 
+.. _ogr-model:
+
 OGR pracuje s konceptem vrstev (*layer*) uložených v datových zdrojích
 (*data source*). OGR používá pro čtení a zápis dat do podporovaných
 datových formátů svůj vlastní *abstraktní model*, který se může jevit
 jako těžkopádný, nicméně spolehlivě funguje pro všechny případy:
 
-*Data Source* (soubor, databáze, protokol, ...)
-    *[Layer]* (obsah souboru, databázová tabulka, ...)
-        *[Feature]* -- vektorové geoprvky (vzhledy jevu)
-            *[Field, Geometry]* -- atributy, geometrie
+* **Driver** - ovladač pro čtení a zápis dat
+* **Data Source** - datový zdroj (soubor, databáze, protokol, ...)
+* **Layer** - datová vrstva (obsah souboru, databázová tabulka, ...)
+* **Feature** - geoprvek (vzhledy jevu)
+* **Field, Geometry** - atributy, geometrie
+    
+.. aafig::
+    :aspect: 70
+    :scale: 65
+
+                                               +-------+          +---------+
+                                               |       |          |         |
+                                          +--->+ Layer |     +--->+ Feature |
+                                         /     |       |    /     |         |
+                                        /      +-------+   /      +---------+
+                                       /                  /
+    +--------+         +------------+ /        +-------+ /        +---------+
+    |        |         |            |/         |       |/         |         |
+    | Driver +-------->+ DataSource +--------->+ Layer +--------->+ Feature |
+    |        |         |            |\         |       |\         |         |
+    +--------+         +------------+ \        +-------+ \        +---------+
+                                       \                  \
+                                        \      +-------+   \      +---------+
+                                         \     |       |    \     |         |
+                                          +--->+ ...   |     +--->+ ...     |
+                                               |       |          |         |
+                                               +-------+          +---------+
+                                       
+Informace abstraktnímu modelu pro rastrová data:
+http://gdal.org/ogr_arch.html
 
 Rozhraní pro Python je pouze abstraktní :abbr:`API (rozhraní pro
 programování aplikací)` nad původními funkcemi a třídami z jazyka C++,

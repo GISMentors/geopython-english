@@ -59,3 +59,5 @@ texinfo_documents = [
 
 sys.path.append(os.path.join('..', 'sphinx-template'))
 from conf_base import *
+
+extensions.append('sphinxcontrib.aafig')
