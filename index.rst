@@ -33,8 +33,14 @@ Pracovní prostředí
 
   .. code:: bash
 
-            sudo apt-get install gedit gedit-plugins
+            sudo apt-get install gedit gedit-plugins python-enum34
 
+* Instalace dalšího softwaru, pokud nepoužíváte OSGeo Live:
+
+  .. code:: bash
+          
+            sudo apt-get install python-virtualenv
+  
   * Fiona
 
     .. code:: bash
