@@ -115,7 +115,7 @@ kanálu můžeme nyní zapsat hodnoty jako matici hodnot ve formátu
 .. code-block:: python
 
     >>> band = target_ds.GetRasterBand(1)
-    >>>
+    >>> ...
     >>> import numpy as np
     >>> band.WriteArray(np.array([[0, 0, 0, 0, 0],
     ...                  [0, 10, 15, 10, 0],
@@ -207,10 +207,15 @@ následujícími parametry:
         [1, 2, 3],
         source_layer,
         burn_values=[255,125,0],
-        options=['ALL_TOUCHED=TRUE']) # žádné mezery okolo znakuk '='
+        options=['ALL_TOUCHED=TRUE']) # žádné mezery okolo znaku '='
     >>> target_ds.FlushCache()
 
 .. gdal.RasterizeLayer(dataset, [1], layer, options = ["ATTRIBUTE=KOD"])
 
 Tato funkce vektorová data zrasterizuje a zapíše je výstupního
 rastrového souboru.
+
+.. figure:: chko.png
+   :class: middle
+           
+    Výsledek rasterizace

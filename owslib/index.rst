@@ -1,5 +1,3 @@
-.. _OWSLib:
-
 Načítán dat pomocí webových služeb OGC
 ######################################
 

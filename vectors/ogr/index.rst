@@ -73,7 +73,6 @@ Nejprve otevření souboru s daty:
     <osgeo.ogr.DataSource; proxy of <Swig Object of type 'OGRDataSourceShadow *' at 0x7f98d8152a50> >
     >>> ds.GetLayerCount()
     1
-    >>>
 
 Práce s vrstvou, její otevření:
 
@@ -88,18 +87,19 @@ Práce s vrstvou, její otevření:
 Schéma vrstvy -- definice typu geometrie a jednotlivých atributových polí:
 
 .. code-block:: python
+    
+   >>> l.GetGeomType()
+   3
+   >>> l.GetGeomType() == ogr.wkbPolygon
+   True
+   >>> l.schema
+   [<osgeo.ogr.FieldDefn; proxy of <Swig Object of type 'OGRFieldDefnShadow *' at 0x7f98d80fa9f0> >,
+   <osgeo.ogr.FieldDefn; proxy of <Swig Object of type 'OGRFieldDefnShadow *' at 0x7f98d80fa8...
+   >>> ...
+   >>> l.schema[4].name
+   'NAZEV'
 
-    >>> l.GetGeomType()
-    3
-    >>> l.GetGeomType() == osgeo.ogr.wkbPolygon
-    True
-    >>> l.schema
-    [<osgeo.ogr.FieldDefn; proxy of <Swig Object of type 'OGRFieldDefnShadow *' at 0x7f98d80fa9f0> >, <osgeo.ogr.FieldDefn; proxy of <Swig Object of type 'OGRFieldDefnShadow *' at 0x7f98d80fa8...
-    >>>
-    >>> l.schema[4].name
-    'NAZEV'
-
-Vypsání názvu geoprvky (atribut ``NAZEV``):
+Vypsání názvů geoprvky (atribut ``NAZEV``):
 
 .. code-block:: python
 
@@ -119,10 +119,10 @@ ohraničujícího obdélíku a centroidu polygonu):
     >>> f.GetField('NAZEV')
     >>> print f.GetField('NAZEV')
     Český ráj
-    >>> geom = f.GetGeomRef()
+    >>> geom = f.GetGeometryRef()
     >>> geom.GetEnvelope()
     (-683329.1875, -681265.625, -993228.75, -991528.0)
-    >>> c = geom.GetCentroid()
+    >>> c = geom.Centroid()
     >>> c.GetPoint()
     (-682407.4126500859, -992433.3498782327, 0.0)
     >>> buff = c.Buffer(100)
@@ -145,13 +145,14 @@ by šlo pravdepodobně vykonat pomocí výše zmíněné knihovny :doc:`fiona
     >>> srs = osr.SpatialReference()
     >>> srs.ImportFromEPSG(5514)
     >>> srs.ExportToProj4()
-    '+proj=krovak +lat_0=49.5 +lon_0=24.83333333333333 +alpha=30.28813972222222 +k=0.9999 +x_0=0 +y_0=0 +ellps=bessel +towgs84=...
+    '+proj=krovak +lat_0=49.5 +lon_0=24.83333333333333 +alpha=30.28813972222222 +k=0.9999 +x_0=0 +y_0=0
+    +ellps=bessel +towgs84=...
     >>> layer = ds.CreateLayer('out.gml', srs, ogr.wkbLineString)
 
-    >>> # Vytvoření nového atributu se jménem 'Name' typu 'string'
-    >>> field_name = ogr.FieldDefn('Name', ogr.OFTString)
+    >>> # Vytvoření nového atributu 'Nazev' a 'Kod'
+    >>> field_name = ogr.FieldDefn('Nazev', ogr.OFTString)
     >>> field_name.SetWidth(24)
-    >>> field_number = ogr.FieldDefn('Number', ogr.OFTInteger)
+    >>> field_number = ogr.FieldDefn('Kod', ogr.OFTInteger)
     >>> layer.CreateField(field_name)
     >>> layer.CreateField(field_number)
 
@@ -161,8 +162,8 @@ by šlo pravdepodobně vykonat pomocí výše zmíněné knihovny :doc:`fiona
     >>> # Vytvoření nového prvku, nastavení geometrie a atributu Name
     >>> feature = ogr.Feature(layer.GetLayerDefn())
     >>> feature.SetGeometry(line)
-    >>> feature.SetField("Name", 'Jméno')
-    >>> feature.SetField("Number", 42)
+    >>> feature.SetField("Nazev", 'Základní linie')
+    >>> feature.SetField("Kod", 42)
     >>> ...
     >>> layer.CreateFeature(feature)
     >>> ...
@@ -170,7 +171,18 @@ by šlo pravdepodobně vykonat pomocí výše zmíněné knihovny :doc:`fiona
     >>> feature.Destroy()
     >>> ds.Destroy()
 
+Výsledek zkontrolujeme:
 
+.. code:: python
+
+    >>> drv = ogr.GetDriverByName('GML')
+    >>> ds = drv.Open('/tmp/out.gml')
+    >>> layer = ds.GetLayer(0)
+    >>> layer.GetFeatureCount()
+    1
+    >>> ds.Destroy()
+
+    
 .. Malá odbočka k pyproj
 .. 
 .. .. code-block:: python

@@ -18,7 +18,7 @@ V následujícím příkladu otevřenem rastrový soubor ve formátu
 .. code-block:: python
 
     >>> import rasterio
-    >>> src = rasterio.open('data/lsat7_2002_nir.tiff')
+    >>> src = rasterio.open('lsat7_2002_nir.tiff')
     >>> src.bounds
     BoundingBox(left=596670.0, bottom=185000.0, right=678330.0, top=258500.0)
     >>> src.crs
@@ -57,9 +57,6 @@ soubor, obsahující pokus o index NDVI.
         
          NDVI = (NIR - VIS) / (NIR  + VIS)
 
-    Protože ale v našem příkladovém souboru není blízký infračervený
-    kanál dostupný, použijeme poměr mezi zeleným a červeným kanálem.
-
 Neprve vytvoříme novou matici pro výsledné hodnoty, následně do tohoto pole uložíme
 výsledek výpočtu pro každý pixel. Pracujeme vlastně v prostředí NumPy, které
 práci s poli významně usnadňuje.
@@ -69,9 +66,9 @@ práci s poli významně usnadňuje.
     >>> (nir, vis) = (data[0], data[1])
     >>> ndvi = (nir - vis) / (nir + vis)
     >>> ndvi.min()
-    -0.3869
+    -0.94444442
     >>> ndvi.max()
-    0.9375
+    0.97435898
 
 Výsledek uložíme do nově vytvořeného souboru. Data budou zkomprimována pomocí
 LWZ komprese a uložena v číselném formátu `float64` (mapa obsahuje čísla s
@@ -80,12 +77,9 @@ plovoucí desetinnou čárkou a negativní hodnoty). Výsledný soubor ve formá
 .. code-block:: python
 
     >>> kwargs = src.meta
-    >>> kwargs.update(
-        dtype=rasterio.float64,
-        count=1,
-        compress='lzw')
+    >>> kwargs.update(dtype=rasterio.float64, count=1, compress='lzw')
     >>> with rasterio.open('ndvi.tif', 'w', **kwargs) as dst:
-            dst.write_band(1, ndvi.astype(rasterio.float64))
+    ...    dst.write_band(1, ndvi.astype(rasterio.float64))
 
 .. figure:: ndvi.png
     

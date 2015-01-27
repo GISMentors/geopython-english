@@ -35,6 +35,8 @@ Pracovní prostředí
 
             sudo apt-get install gedit gedit-plugins python-enum34
 
+  .. note:: Uživatel: `user`, heslo: `user`
+          
 * Instalace dalšího softwaru, pokud nepoužíváte OSGeo Live:
 
   .. code:: bash
@@ -64,7 +66,22 @@ Pracovní prostředí
     .. code:: bash
 
               sudo easy_install OWSLib
-     
+
+  * Shapely
+
+    .. code:: bash
+
+              mkdir shapely_env
+              virtualenv shapely_env
+              source shapely_env/bin/activate
+              sudo pip install Shapely
+
+  * PyProj
+
+    .. code:: bash
+            
+              sudo easy_install pyproj
+       
 * Nastavení
 
   .. code:: bash
@@ -78,6 +95,7 @@ Pracovní prostředí
             
             wget http://training.gismentors.eu/geodata/geopython/data.tgz
             tar xvzf data.tgz
+            cd data
      
 Obsah
 =====

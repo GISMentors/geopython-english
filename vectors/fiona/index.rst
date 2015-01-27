@@ -40,32 +40,33 @@ Následně můžeme zjišťovat některé vlastnosti této kolekce geoprvků, vi
 
 .. code-block:: python
 
-    # driver
+    >>> # driver
     >>> chko.driver
     u'ESRI Shapefile'
 
-    # souřadnicový systém
+    >>> # souřadnicový systém
     >>> chko.crs
         {u'lon_0': 24.83333333333333, u'k': 0.9999, u'ellps': u'bessel', u'y_0': 0, u'no_defs': True,
          u'proj': u'krovak', u'x_0': 0, u'units': u'm', u'alpha': 30.28813972222222, u'lat_0': 49.5}
 
-    # jméno souboru
+    >>> # jméno souboru
     >>> chko.path
     u'data/chko.shp'
 
-    # jméno vrstvy
+    >>> # jméno vrstvy
     >>> chko.name
     u'chko'
 
-    # hraniční souřadnice
+    >>> # hraniční souřadnice
     >>> chko.bounds
     (-891817.1765, -1209945.3889999986, -440108.9158999994, -943075.1875)
 
-    # všechna metadata pohromadě
-    >>> import json # pro hezčí výstup
-    >>> print json.dumps(
-    ...     chko.meta,
-    ...     sort_keys=True, indent=4, separators=(',', ': '))
+    >>> # všechna metadata pohromadě
+    >>> chko.meta
+    >>> ...
+    >>> ...            
+    >>> import json # naformátovat výstup
+    >>> print json.dumps(chko.meta, sort_keys=True, indent=4, separators=(',', ': '))
     {
         "crs": {
             "alpha": 30.28813972222222,
@@ -113,49 +114,49 @@ zpracovávat je prvek po prvku. Nejprve ale zjistíme jejich počet:
 Souřadnicové systémy
 --------------------
 
-Na pozadí Fiony se používají nástroje knihovny GDAL/OGR, proto ani
-práce se souřadnicovými systémy není o tolik zjednodušena, jak by
-možná bylo potřeba. Pokud obsahuje dataset definici souřadnicového
-systému pomocí kódu EPSG, je tento využit.
+Na pozadí Fiony se používají nástroje knihovny `GDAL
+<http://www.gdal.org>`_, proto ani práce se souřadnicovými systémy
+není o tolik zjednodušena, jak by možná bylo potřeba. Pokud obsahuje
+dataset definici souřadnicového systému pomocí kódu EPSG, je tento
+využit, v našm případě se jedná o :epsg:`4326`.
 
 .. code-block:: python
 
-    >>> ruian = fiona.open('20141031_ST_UKSH.gpkg', 'r')
-    >>>
+    >>> natural = fiona.open('natural.shp', 'r')
+    >>> ...
     >>> from fiona.crs import to_string
-    >>> print(to_string(ruian.crs))
-    +init=epsg:5514
+    >>> print(to_string(natural.crs))
+    +init=epsg:4326
 
 Při vytvoření nového geoprvku s definicí souřadnicového systému je postupováno
-analogicky:
+analogicky (zde S-JTSK, :epsg:`5514`):
 
 .. code-block:: python
 
-    >>>
     >>> from fiona.crs import from_epsg
-    >>> from_epsg(3857)
-    {'init': 'epsg:3857', 'no_defs': True}
+    >>> from_epsg(5514)
+    {'init': 'epsg:5514', 'no_defs': True}
 
 Fiona těmito funkcemi pouze mapuje jednotlivé parametry souřadnicového
 systému a stará se o jejich převod do textového řetězce a z textových
 řetězců.
 
 
-Procházní dat
--------------
+Procházení dat
+--------------
 
 Prvky v datovém souboru můžeme procházet postupně:
 
 .. code-block:: python
 
-    >>> for feature in ruian:
+    >>> for feature in chko:
     ...     print feature['geometry']['type']
 
 anebo si vybrat některý z geoprvků a dále s ním pracovat:
 
 .. code-block:: python
 
-    >>> print ruian[54]['properties']['NAZEV']
+    >>> print chko[54]['properties']['NAZEV']
     Český ráj
 
 
@@ -176,7 +177,7 @@ vlastnosti na objekty typu JSON.
 .. code-block:: python
 
     >>> from shapely.geometry import shape
-    >>> cr = ruian[54]
+    >>> cr = chko[54]
     >>> poly = shape(cr['geometry'])
     >>> poly.bounds
     (-683329.1875, -993228.75, -681265.625, -991528.0)
@@ -203,9 +204,13 @@ Můžeme změnit některé vlastnosti geoprvků, např. upravit atribut `NAZEV`:
     >>> feature['id'] = -1
     >>> feature['geometry'] = mapping(buff)
     >>> feature['properties']['NAZEV'] = u'Mordor'
-    >>> ruian = fiona.open('chko-zmrsene.shp', 'a')
-    >>> ruian.write(feature)
-    >>> ruian.close()
+    >>> chko = fiona.open('chko.shp', 'a')
+    >>> len(chko)
+    5626            
+    >>> chko.write(feature)
+    >>> len(chko)
+    5627
+    >>> chko.close()
 
 Načtení dat z webové služby
 ---------------------------
@@ -215,8 +220,10 @@ uložení do dočasného souboru na disk a následném načtení. Pokud jsme v s
 kdy tuto možnost nemáme, můžeme zkusit vyrobit virtuální objekt typu soubor a
 ten následně použít.
 
-Viz kapitola o :ref:`OWSLib` a :ref:`OWSLibWFS`.
+Viz kapitola o :doc:`OWSLib <../../owslib/index>` a :ref:`OWSLibWFS`.
 
+.. todo:: Opravit - nefunkční
+          
 .. code-block:: python
 
     [...]
@@ -228,14 +235,14 @@ Viz kapitola o :ref:`OWSLib` a :ref:`OWSLibWFS`.
 
     >>> from osgeo import gdal
     >>> gdal.FileFromMemBuffer('/vsimem/temp', f.read())
-    >>>
+    >>> ...
     >>> # malý trik
     >>> from fiona.collection import supported_drivers
     >>> supported_drivers['GML'] = 'r'
-    >>>
+    >>> ...
     >>> # a čteme
     >>> c = fiona.open('/vsimem/temp', 'r')
-    >>>
+    >>> ...
     >>> # počet geoprvků
     >>> len(c)
     3571
