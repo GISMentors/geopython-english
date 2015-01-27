@@ -72,12 +72,13 @@ Pracovní prostředí
             cd ~/Desktop
 
 
-* Stažení geodat:
+* Stažení a rozbalení geodat:
 
   .. code:: bash
             
             wget http://training.gismentors.eu/geodata/geopython/data.tgz
-
+            tar xvzf data.tgz
+     
 Obsah
 =====
 
