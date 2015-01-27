@@ -29,15 +29,48 @@ Pracovní prostředí
 * OSGeo Live:
   http://live.osgeo.org
 
-* Nastavení
+* Instalace dalšího softwaru
 
   .. code:: bash
 
             sudo apt-get install gedit gedit-plugins
+
+  * Fiona
+
+    .. code:: bash
+            
+              mkdir fiona_env
+              virtualenv fiona_env
+              source fiona_env/bin/activate
+              sudo pip install Fiona
+
+  * Rasterio
+
+    .. code:: bash
+          
+       mkdir rasterio_env
+       virtualenv rasterio_env
+       source rasterio_env/bin/activate
+       sudo pip install Rasterio
+
+  * OWSLib
+
+    .. code:: bash
+
+              sudo easy_install OWSLib
+     
+* Nastavení
+
+  .. code:: bash
+
             cd ~/Desktop
 
-* Geodata ke stažení:
-  http://training.gismentors.eu/geodata/geopython/data.tgz
+
+* Stažení geodat:
+
+  .. code:: bash
+            
+            wget http://training.gismentors.eu/geodata/geopython/data.tgz
 
 Obsah
 =====
