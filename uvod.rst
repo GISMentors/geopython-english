@@ -39,11 +39,11 @@ vybraných nástrojů a jejich napojení na jazyk Python:
 
 **Knihovny a nástroje**
     * *GDAL*: http://gdal.org
-    * *Fiona*: https://pypi.python.org/pypi/Fiona
-    * *Rasterio*: <https://pypi.python.org/pypi/rasterio
-    * *Proj4*: http://trac.osgeo.org/proj
+    * *Fiona*: http://toblerity.org/fiona/manual.html
+    * *Rasterio*: https://github.com/mapbox/rasterio
+    * *PyProj*: https://github.com/jswhit/pyproj
     * *R (rpy2)*: http://rpy.sourceforge.net
-    * *Shapely*: https://pypi.python.org/pypi/Shapely
+    * *Shapely*: http://toblerity.org/shapely/manual.html
 
 **Databáze**
     * *PostGIS*: http://postgis.net
@@ -54,12 +54,14 @@ vybraných nástrojů a jejich napojení na jazyk Python:
     * *TopoJSON*: https://github.com/calvinmetcalf/topojson.py
     * *RTree index*: https://github.com/Toblerity/rtree
 
-Seznam samozřejmě není úplný a konečný.
+Seznam samozřejmě není úplný či konečný.
 
-V tomto kurzu se zaměříme na úvod do práce s knihovnou **GDAL** a
-jejími nadstavbami **Rasterio** a **Fiona**. Vyzkoušíme si na práci s
-knihovnou pro webové služby OGC **OWSLib** a nakonec se podíváme na
-serverové aplikace pomocí rozhraní **python-mapscript** a **gsconfig**.
+V tomto kurzu se zaměříme na úvod do práce s knihovnou :doc:`GDAL
+<rasters/gdal>` a jejími nadstavbami :doc:`Rasterio
+<rasters/rasterio>` a :doc:`Fiona <vectors/fiona/index>`. Vyzkoušíme si na
+práci s knihovnou pro webové služby OGC :doc:`OWSLib <owslib/index>` a
+nakonec se podíváme na serverové aplikace pomocí rozhraní
+:doc:`python-mapscript <mapscript/index>`.
 
 Cílem kurzu přirozeně není kompletní pokrytí problematiky GIS a jazyka Python.
 Cílem je poskytnout přehled o nejčastěji používaných základních nástrojích, nad

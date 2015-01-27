@@ -17,4 +17,4 @@ touto knihovnou postavena. Jedná se o jakousi analogii ke knihovnám
 
    rasterio
    gdal
-   pil
+..   pil

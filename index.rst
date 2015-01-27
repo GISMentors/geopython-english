@@ -7,9 +7,9 @@ Motivace
     
   * Množství knihoven a nástrojů (`GDAL <http://gdal.org>`_, `PROJ4
     <http://trac.osgeo.org/proj/>`_, `Shapely
-    <https://pypi.python.org/pypi/Shapely>`_, `Fiona
-    <https://pypi.python.org/pypi/Fiona>`_, `RasterIO
-    <https://pypi.python.org/pypi/rasterio>`_, `MapServer Python
+    <http://toblerity.org/shapely/manual.html>`_, `Fiona
+    <http://toblerity.org/fiona/manual.html>`_, `Rasterio
+    <https://github.com/mapbox/rasterio>`_, `MapServer Python
     MapScript <http://mapserver.org/mapscript/python.html>`_, `GeoServer
     gsconfig <https://pypi.python.org/pypi/gsconfig>`_, `OWSLib
     <http://geopython.github.io/OWSLib/>`_, `PyWPS
@@ -27,7 +27,8 @@ Pracovní prostředí
 ==================
 
 * OSGeo Live:
-  http://live.osgeo.org/en/index.html
+  http://live.osgeo.org
+
 * Nastavení
 
   .. code:: bash
@@ -35,12 +36,8 @@ Pracovní prostředí
             sudo apt-get install gedit gedit-plugins
             cd ~/Desktop
 
-* Geodata:
-    
-  * Datové sady:
-    https://github.com/GISMentors/dataset
-  * Předpřipravené data RÚIAN:
-    http://training.gismentors.eu/geodata/ruian/
+* Geodata ke stažení:
+  http://training.gismentors.eu/geodata/geopython/data.tgz
 
 Obsah
 =====
