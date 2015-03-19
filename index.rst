@@ -1,9 +1,10 @@
 Motivace
 ========
 
-#. :wikipedia:`Python` baví
-#. Python se neučí, Python se píše
-#. Python je dnes asi nejvíce "geopozitivní" programovací jazyk
+* :wikipedia:`Python` baví
+* Python se neučí, Python se píše
+* Python je dnes asi nejvíce "geopozitivní" programovací jazyk
+
   * Množství knihoven a nástrojů (`GDAL <http://gdal.org>`_, `PROJ4
     <http://trac.osgeo.org/proj/>`_, `Shapely
     <http://toblerity.org/shapely/manual.html>`_, `Fiona
