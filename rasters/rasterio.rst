@@ -32,11 +32,9 @@ V následujícím příkladu otevřenem rastrový soubor ve formátu
     >>> src.res
     (10.0, 10.0)
 
-
 .. figure:: rgb.png
-    :alt: RGB obrázek
 
-    Výsledný soubor s NDVI indexem
+   RGB kompozice
 
 Načtení barevných kanálů:
 
