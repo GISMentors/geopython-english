@@ -6,7 +6,6 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = _build
-PROJECT_NAME  = "GeoPython"
 
 # User-friendly check for sphinx-build
 ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
@@ -51,7 +50,7 @@ clean:
 	rm -rf $(BUILDDIR)/*
 
 html:
-	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	$(SPHINXBUILD) -E -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
@@ -86,17 +85,17 @@ qthelp:
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/$(PROJECT_NAME).qhcp"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/kolenGRASSGIS.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/$(PROJECT_NAME).qhc"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/kolenGRASSGIS.qhc"
 
 devhelp:
 	$(SPHINXBUILD) -b devhelp $(ALLSPHINXOPTS) $(BUILDDIR)/devhelp
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/$(PROJECT_NAME)"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/$(PROJECT_NAME)"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/kolenGRASSGIS"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/kolenGRASSGIS"
 	@echo "# devhelp"
 
 epub:
@@ -105,14 +104,20 @@ epub:
 	@echo "Build finished. The epub file is in $(BUILDDIR)/epub."
 
 latex:
-	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
+	$(SPHINXBUILD) -E -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
+	sed -i -e 's/\\begin{figure}\[htbp\]/\\begin{figure}\[!ht\]/' \
+		-e 's/\\DUspan{fignote}/\\textcolor{red}/g' \
+		-e 's/\\DUspan{map}/\\texttt/g' \
+		-e 's/\\DUspan{item}/\\colorbox[rgb]{0.80,0.80,0.80}/g' \
+		-e 's/\\DUspan{secnotoc}/\\textrm/g' \
+		$(BUILDDIR)/latex/*.tex
 	@echo
 	@echo "Build finished; the LaTeX files are in $(BUILDDIR)/latex."
 	@echo "Run \`make' in that directory to run these through (pdf)latex" \
 	      "(use \`make latexpdf' here to do that automatically)."
 
 latexpdf:
-	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
+	$(MAKE) latex
 	@echo "Running LaTeX files through pdflatex..."
 	$(MAKE) -C $(BUILDDIR)/latex all-pdf
 	@echo "pdflatex finished; the PDF files are in $(BUILDDIR)/latex."
