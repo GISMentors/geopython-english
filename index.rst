@@ -1,10 +1,9 @@
 Motivace
 ========
 
-* Python baví
-* Python se neučí, Python se píše
-* :wikipedia:`Python` je dnes asi nejvíce "geopozitivní" programovací jazyk
-    
+#. :wikipedia:`Python` baví
+#. Python se neučí, Python se píše
+#. Python je dnes asi nejvíce "geopozitivní" programovací jazyk
   * Množství knihoven a nástrojů (`GDAL <http://gdal.org>`_, `PROJ4
     <http://trac.osgeo.org/proj/>`_, `Shapely
     <http://toblerity.org/shapely/manual.html>`_, `Fiona
@@ -29,70 +28,19 @@ Pracovní prostředí
 * OSGeo Live:
   http://live.osgeo.org
 
+  * Uživatel: `user`, heslo: `user`
+
 * Instalace dalšího softwaru
 
   .. code:: bash
 
             sudo apt-get install gedit gedit-plugins python-enum34
 
-  .. note:: Uživatel: `user`, heslo: `user`
-          
-* Instalace dalšího softwaru, pokud nepoužíváte OSGeo Live:
-
-  .. code:: bash
-          
-            sudo apt-get install python-virtualenv
-  
-  * Fiona
-
-    .. code:: bash
-            
-              mkdir fiona_env
-              virtualenv fiona_env
-              source fiona_env/bin/activate
-              sudo pip install Fiona
-
-  * Rasterio
-
-    .. code:: bash
-          
-       mkdir rasterio_env
-       virtualenv rasterio_env
-       source rasterio_env/bin/activate
-       sudo pip install Rasterio
-
-  * OWSLib
-
-    .. code:: bash
-
-              sudo easy_install OWSLib
-
-  * Shapely
-
-    .. code:: bash
-
-              mkdir shapely_env
-              virtualenv shapely_env
-              source shapely_env/bin/activate
-              sudo pip install Shapely
-
-  * PyProj
-
-    .. code:: bash
-            
-              sudo easy_install pyproj
-       
-* Nastavení
-
-  .. code:: bash
-
-            cd ~/Desktop
-
-
 * Stažení a rozbalení geodat:
 
   .. code:: bash
-            
+
+            cd ~/Desktop            
             wget http://training.gismentors.eu/geodata/geopython/data.tgz
             tar xvzf data.tgz
             cd data
@@ -100,13 +48,15 @@ Pracovní prostředí
 Obsah
 =====
 
+.. warning:: Toto je pracovní verze školení, která je aktuálně ve vývoji!
+
 .. toctree::
    :maxdepth: 2
 
    uvod
-   owslib/index
    vectors/index
    rasters/index
+   owslib/index
    mapscript/index
    pyproj/index
 
@@ -144,16 +94,19 @@ Text školení je licencován pod `Creative Commons Attribution-ShareAlike 4.0 I
    :width: 110px
    :scale-latex: 100
               
-*Verze textu školení:* |release| (|today|)
+*Verze textu školení:* |release| (sestaveno |today|)
 
 Autoři
 ------
 
-Za `GISMentors <http://www.gismentors.eu/>`_:
+Za `GISMentors <http://www.gismentors.cz/>`_:
 
 * Jáchym Čepický ``<jachym.cepicky opengeolabs.cz>``
 * Martin Landa ``<martin.landa opengeolabs.cz>``
-    
+
+Text dokumentu
+--------------
+
 .. only:: latex
 
    Online HTML verze textu školení je dostupná na adrese: http://training.gismentors.eu/geopython/

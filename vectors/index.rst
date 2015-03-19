@@ -19,5 +19,5 @@ běžně setkat, zejména data z~registru RÚIAN.
 .. toctree::
    :maxdepth: 2
 
-   fiona/index
    ogr/index
+   fiona/index
