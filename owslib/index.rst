@@ -1,5 +1,5 @@
-Načítán dat pomocí webových služeb OGC
-######################################
+Načítání dat pomocí webových služeb OGC
+#######################################
 
 `Open Geospatial Consortium <http://opengeospatial.org>`_ (OGC) je mezinárodní
 standardizační organizace. Její členové se zabývají vývojem a údržbou standardů
