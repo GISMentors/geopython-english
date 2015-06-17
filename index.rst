@@ -26,18 +26,8 @@ Motivace
 Pracovní prostředí
 ==================
 
-* OSGeo Live:
-  http://live.osgeo.org
-
-  * Uživatel: `user`, heslo: `user`
-
-* Instalace dalšího softwaru
-
-  .. code:: bash
-
-            sudo apt-get install gedit gedit-plugins python-enum34
-
-* Stažení a rozbalení geodat:
+* Stažení a rozbalení `geodat pro školení
+  <http://training.gismentors.eu/geodata/geopython/data.tgz>`_:
 
   .. code:: bash
 
@@ -49,7 +39,7 @@ Pracovní prostředí
 Obsah
 =====
 
-.. warning:: Toto je pracovní verze školení, která je aktuálně ve vývoji!
+.. warning:: :red:`Toto je pracovní verze školení, která je aktuálně ve vývoji!`
 
 .. toctree::
    :maxdepth: 2
@@ -83,7 +73,9 @@ GeoPython
 Fóra, dokumentace
 -----------------
 
-* The GIS Stack Exchange: http://gis.stackexchange.com/ (http://gis.stackexchange.com/?tags=python)
+* The GIS Stack Exchange: http://gis.stackexchange.com/
+
+  (http://gis.stackexchange.com/?tags=python)
 * Last but not least, https://www.google.com
 
 Licence dokumentu
