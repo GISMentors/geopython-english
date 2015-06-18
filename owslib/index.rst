@@ -145,7 +145,7 @@ Vlastnosti záznamu:
     'service'
     >>> print zm10.title
     Prohlížecí služba WMS - ZM 10
-    >>> >>> print zm10.abstract
+    >>> print zm10.abstract
     Prohlížecí služba WMS-ZM10-P je poskytována jako veřejná prohlížecí
     služba nad daty Základní mapy ČR 1:10 000.  Služba splňuje Technické
     pokyny pro INSPIRE prohlížecí služby v. 3.11 a zároveň splňuje
@@ -199,6 +199,7 @@ Stažení a uložení dat:
 
     >>> img = zm10_wms.getmap(layers=['GR_ZM10'],
         size=[800, 600],
+        srs="EPSG:5514",
         bbox=[-950003.175021186, -1250003.1750036045, -399990.474995786, -899996.8249909044],
         format="image/png")
     >>> out = open('zm10.png', 'w')
@@ -252,7 +253,7 @@ Podíváme se, jaká data mají v `Agentůře ochrany přírody a krajiny <http:
     >>> print natura.abstract
     Služba zpřístupňuje geografická data soustavy území Natura 2000 v České republice; © AOPK ČR
 
-    >>> print natura.identifiers[1]
+    >>> print natura.identifiers[1]['identifier']
     https://gis.nature.cz/arcgis/services/UzemniOchrana/Natura2000/MapServer/
     WFSServer?service=WFS&request=GetCapabilities&version=1.1.0
 
@@ -263,8 +264,9 @@ Načteme WFS AOPK:
 .. code-block:: python
 
     >>> from owslib import wfs as webfeatureservice
-    >>> aopk = webfeatureservice.WebFeatureService('https://gis.nature.cz/arcgis/services/UzemniOchrana/' \
-    'Natura2000/MapServer/WFSServer?service=WFS&request=GetCapabilities&version=1.1.0', version='1.1.0')
+    >>> url = natura.identifiers[1]['identifier']
+    >>> # nefunguje na připojení https, použijeme http
+    >>> aopk = webfeatureservice.WebFeatureService('http://gis.nature.cz/arcgis/services/UzemniOchrana/Natura2000/MapServer/WFSServer')
 
 
 Zjistíme vlastnosti služby (Capabilities):
@@ -274,8 +276,7 @@ Zjistíme vlastnosti služby (Capabilities):
     >>> capabilities = aopk.getcapabilities()
     >>> capabilities.geturl()
     'https://gis.nature.cz/arcgis/services/UzemniOchrana/Natura2000/MapServer/WFSServer?service=WFS&request=GetCapabilities&version=1.1.0'
-    >>>
-    print aopk.provider.name
+    >>> print aopk.provider.name
     Agentura ochrany přírody a krajiny České republiky
     >>>
     >>> print aopk.identification.title
@@ -295,18 +296,35 @@ Metadata
     >>> for i in aopk.contents:
     ...     print i
     ...
-    UzemniOchrana_ChranUzemi:Maloplošné_zvláště_chráněné_území__MZCHÚ_
-    UzemniOchrana_ChranUzemi:Smluvně_chráněné_území
-    UzemniOchrana_ChranUzemi:Zonace_velkoplošného_zvláště_chráněného_území
-    UzemniOchrana_ChranUzemi:Zákonné_ochranné_pásmo_MZCHÚ
-    UzemniOchrana_ChranUzemi:Velkoplošné_zvláště_chráněné_území
-    >>>
-    >>> aopk.contents[u'UzemniOchrana_ChranUzemi:Zonace_velkoplošného_zvláště_chráněného_území']
+    UzemniOchrana_Natura2000:PtaÄÃ­_oblast
+    UzemniOchrana_Natura2000:Forma_ochrany_EVL_-_stav_k_24._5._2013
+    UzemniOchrana_Natura2000:Evropsky_vÃ½znamnÃ¡_lokalita__EVL_
+
+Načteme ještě službu chráněných území
+
+.. code-block:: python
+    >>> chranena_uzemi = cenia.records['5473579f-fb08-48ab-893d-3d3e0a02080a']
+    >>> chranena_uzemi.identifiers[1]['identifier']
+    'https://gis.nature.cz/arcgis/services/UzemniOchrana/ChranUzemi/MapServer/WFSServer?SERVICE=WFS&request=GetCapabilities'
+    >>> chranena_uzemi_wfs = webfeatureservice.WebFeatureService('http://gis.nature.cz/arcgis/services/UzemniOchrana/ChranUzemi/MapServer/WFSServer')
+    >>> 
+    >>> for i in chranena_uzemi_wfs.contents:
+    ...     print i
+    ... 
+    UzemniOchrana_ChranUzemi:MaloploÅ¡nÃ©_zvlÃ¡Å¡tÄ_chrÃ¡nÄnÃ©_ÃºzemÃ­__MZCHÃ_
+    UzemniOchrana_ChranUzemi:SmluvnÄ_chrÃ¡nÄnÃ©_ÃºzemÃ­
+    UzemniOchrana_ChranUzemi:ZÃ¡konnÃ©_ochrannÃ©_pÃ¡smo_MZCHÃ
+    UzemniOchrana_ChranUzemi:VelkoploÅ¡nÃ©_zvlÃ¡Å¡tÄ_chrÃ¡nÄnÃ©_ÃºzemÃ­
+    UzemniOchrana_ChranUzemi:Zonace_velkoploÅ¡nÃ©ho_zvlÃ¡Å¡tÄ_chrÃ¡nÄnÃ©ho_ÃºzemÃ­
+    >>> 
+    >>> 
+    >>> identifier = u'UzemniOchrana_ChranUzemi:Zonace_velkoplo\xc5\xa1n\xc3\xa9ho_zvl\xc3\xa1\xc5\xa1t\xc4\x9b_chr\xc3\xa1n\xc4\x9bn\xc3\xa9ho_\xc3\xbazem\xc3\xad'
+    >>> chranena_uzemi_wfs.contents[identifier]
     <owslib.feature.wfs100.ContentMetadata instance at 0x7f90a1ec3e60>
     >>>
-    >>> aopk.contents[u'UzemniOchrana_ChranUzemi:Zonace_velkoplošného_zvláště_chráněného_území'].boundingBoxWGS84
+    >>> chranena_uzemi_wfs.contents[identifier].boundingBoxWGS84
     (-891817.1765, -1209945.389, -440108.91589999903, -943075.1875)
-    >>> aopk.contents[u'UzemniOchrana_ChranUzemi:Zonace_velkoplošného_zvláště_chráněného_území'].crsOptions
+    >>> chranena_uzemi_wfs.contents[identifier].crsOptions
     [urn:ogc:def:crs:EPSG::5514]
     >>>
 
@@ -315,7 +333,7 @@ Data
 
 .. code-block:: python
 
-    >>> features = aopk.getfeature(['UzemniOchrana_ChranUzemi:Zonace_velkoplošného_zvláště_chráněného_území'])
+    >>> features = chranena_uzemi_wfs.getfeature([identifier])
     >>> print features
     <cStringIO.StringI object at 0x7f3e9048dc68>
     >>> print features.read()
