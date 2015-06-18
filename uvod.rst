@@ -4,14 +4,14 @@
 **Python** je populární programovací jazyk, který má své četné příznivce stejně
 jako zarputilé odpůrce. Oproti jiným běžně rozšířeným jazykům je jeho syntaxe
 zvláštní mimo jiné v tom, že nepoužívá závorky - bloky kódu jsou odděleny
-navzájem odsazením zdrojového textu.
+pouhým *odsazením* zdrojového textu.
 
 .. note:: **Příklad funkce main() v jazyku Python**
 
    .. code:: bash
 
       def main():
-          print "ahoj"
+          print("ahoj")
 
 Ve světe geoinformačních technologií je Python velice oblíbený (a
 můžeme říci, že čím dál oblíbenější). Stojí rozkročen mezi jednoduchým
@@ -39,11 +39,11 @@ vybraných nástrojů a jejich napojení na jazyk Python:
 
 **Knihovny a nástroje**
     * *GDAL*: http://gdal.org
-    * *Fiona*: http://toblerity.org/fiona/manual.html
+    * *Fiona*: http://toblerity.org/fiona
     * *Rasterio*: https://github.com/mapbox/rasterio
     * *PyProj*: https://github.com/jswhit/pyproj
     * *R (rpy2)*: http://rpy.sourceforge.net
-    * *Shapely*: http://toblerity.org/shapely/manual.html
+    * *Shapely*: http://toblerity.org/shapely
 
 **Databáze**
     * *PostGIS*: http://postgis.net
@@ -63,9 +63,9 @@ práci s knihovnou pro webové služby OGC :doc:`OWSLib <owslib/index>` a
 nakonec se podíváme na serverové aplikace pomocí rozhraní
 :doc:`python-mapscript <mapscript/index>`.
 
-Cílem kurzu přirozeně není kompletní pokrytí problematiky GIS a jazyka Python.
-Cílem je poskytnout přehled o nejčastěji používaných základních nástrojích, nad
-kterými lze stavět další aplikace. Tyto nástroje jsou ve své většině používány i
-dalšími programy a knihovnami a proto je dobré o nich vědět a chápat jejich
-principy.
+Cílem kurzu není přirozeně kompletní pokrytí problematiky GIS a jazyka
+Python, nýbrž poskytnutí přehledu o nejčastěji používaných základních
+nástrojích, nad kterými lze stavět další aplikace. Tyto nástroje jsou
+ve své většině používány i dalšími programy a knihovnami a proto je
+dobré o nich vědět a chápat jejich principy.
     

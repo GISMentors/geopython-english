@@ -15,7 +15,7 @@ touto knihovnou postavena. Jedná se o jakousi analogii ke knihovnám
 .. toctree::
    :maxdepth: 2
 
-   gdal
    rasterio
+   gdal
 
 ..   pil

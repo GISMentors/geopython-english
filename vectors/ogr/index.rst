@@ -132,9 +132,9 @@ ohraničujícího obdélíku a centroidu polygonu):
 V následujícím příkladu si předvedeme, jak pracovat s vektorovými daty
 *od A do Z*, tedy jeho otevření, zjištění některých metadat, změna
 atributu vybraného geoprvku, uložení změn zpátky do souboru. To celé
-by šlo pravdepodobně vykonat pomocí výše zmíněné knihovny :doc:`fiona
-<Fiona>` přibližně 3× jednoduššeji. OGR přistupuje k datům na nižší
-úrovi, což může být někdy výhodnější.
+by šlo pravdepodobně vykonat pomocí výše zmíněné knihovny :ref:`Fiona <fiona>`
+přibližně 3× jednoduššeji. OGR přistupuje k datům na nižší úrovi, což
+může být někdy výhodnější.
 
 .. code-block:: python
 
@@ -175,8 +175,7 @@ Výsledek zkontrolujeme:
 
 .. code:: python
 
-    >>> drv = ogr.GetDriverByName('GML')
-    >>> ds = drv.Open('/tmp/out.gml')
+    >>> ds = ogr.Open('/tmp/out.gml')
     >>> layer = ds.GetLayer(0)
     >>> layer.GetFeatureCount()
     1

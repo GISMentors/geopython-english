@@ -218,4 +218,4 @@ rastrového souboru.
 .. figure:: chko.png
    :class: middle
            
-    Výsledek rasterizace
+   Výsledek rasterizace

@@ -74,7 +74,7 @@ přímo nalezneme na adrese http://geoportal.gov.cz/php/micka/csw/index.php.
 
     >>> from owslib.csw import CatalogueServiceWeb
     >>> cenia = CatalogueServiceWeb('http://geoportal.gov.cz/php/micka/csw/index.php')
-    >>> cenia.servicetype
+    >>> cenia.service
     'CSW'
 
 Vyhledávání záznamů, které jsou služba a obsahují klíčové slovo `WMS`:
@@ -132,6 +132,8 @@ ohraničující obdélník Prahy:
     >>>
 
 Vlastnosti záznamu:
+
+.. todo:: Nefunguje...
 
 .. code-block:: python
 
@@ -253,6 +255,8 @@ Podíváme se, jaká data mají v `Agentůře ochrany přírody a krajiny <http:
 
 Načteme WFS AOPK:
 
+.. todo:: Nefunguje...
+
 .. code-block:: python
 
     >>> from owslib import wfs as webfeatureservice
@@ -317,11 +321,13 @@ Data
 CUZK WFS
 """"""""
 
+.. todo:: Nefunguje kraj.read()
+
 .. code-block:: python
 
     >>> cuzk = webfeatureservice.WebFeatureService('http://geoportal.cuzk.cz/wfs_au/wfservice.aspx',
         version="2.0.0")
-    >>> for cuzk.contents as c: print c
+    >>> for c in cuzk.contents: print c
     ...
     gmgml:OKRES
     gmgml:KRAJ

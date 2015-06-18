@@ -6,25 +6,23 @@ Knihovna Fiona
 Knihovna `Fiona <http://toblerity.org/fiona/>`_ jako nadstavba nad
 knihovnou OGR představuje modernější objektově orientovaný způsob
 práce s vektorovými daty. Načtená vektorových dat knihovna přemapovává
-do struktury GeoJSON a stejné struktury zapisuje zpět do výstupních
+do struktury :wikipedia-en:`GeoJSON` a stejné struktury zapisuje zpět do výstupních
 souborů. Uživatel se nemusí zabývat kurzory, vrstvami, geometrickými
 operacemi a dalšími *odbornými* termíny.
 
-Fiona není nástroj vhodný na **všechny** operace - jednoduchost práce
+Fiona **není** nástroj vhodný na **všechny** operace - jednoduchost práce
 je vykoupena poněkud pomalejším během kódu a omezením velikosti
 zpracovávaných dat.  Tam kde OGR používá pointery, Fiona zkopíruje
 vektorová data do objektů jazyka Python, což samozřejmě vede k
 intenzivnějšímu využívání paměti. Pokud potřebujete filtrovat
 geoprvky, knihovna OGR je asi vhodnější. Pokud potřebujete zpracovat
-postupně všechny geoprvky ve vrstvěý, měla by být rychlejší Fiona.
+postupně všechny geoprvky ve vrstvě, měla by být rychlejší Fiona.
 
 .. note::
    
    Fiona je vhodná na binární souborové formáty dat. Pro práci s daty ve
    formátu (Geo)JSON, používejte balíček ``json``. Pro práci s daty v
    databázích, používejte jejich vlastní knihovny.
-
-**Dokumentace:** http://toblerity.org/fiona/manual.html
 
 Nejprve je potřeba vytvořit tvz. *kolekci* geoprvků:
 
@@ -35,7 +33,7 @@ Nejprve je potřeba vytvořit tvz. *kolekci* geoprvků:
     >>> chko
     <open Collection 'chko.shp:chko', mode 'r' at 0x7feea9595410>
 
-Následně můžeme zjišťovat některé vlastnosti této kolekce geoprvků, viz
+Následně můžeme zjišťovat vlastnosti této kolekce geoprvků, viz
 `dokumentace <http://toblerity.org/fiona/manual.html>`_.
 
 .. code-block:: python
@@ -118,7 +116,7 @@ Na pozadí Fiony se používají nástroje knihovny `GDAL
 <http://www.gdal.org>`_, proto ani práce se souřadnicovými systémy
 není o tolik zjednodušena, jak by možná bylo potřeba. Pokud obsahuje
 dataset definici souřadnicového systému pomocí kódu EPSG, je tento
-využit, v našm případě se jedná o :epsg:`4326`.
+využit, v našem případě se jedná o :epsg:`4326`.
 
 .. code-block:: python
 
@@ -142,8 +140,8 @@ systému a stará se o jejich převod do textového řetězce a z textových
 řetězců.
 
 
-Procházení dat
---------------
+Procházení geoprvků
+-------------------
 
 Prvky v datovém souboru můžeme procházet postupně:
 
