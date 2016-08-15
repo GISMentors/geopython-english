@@ -1,84 +1,83 @@
-Rasterio
+RasterIO
 ========
 
-Knihovna `rasterio <https://github.com/mapbox/rasterio>`_ je opět dílo
-zejména `Seana Gilliese <http://sgillies.net/>`_, tentokrát v rámci
-jeho působení ve firmě `MapBox <http://mapbox.com>`_. Rasterio pracuje
-s rastrovými geografickými datovými sadami. Na pozadí Rasterio pracuje
-spolehlivá knihovna :doc:`gdal`.
+RasterIO library is another work of Sean Gillies, this time as one of
+the results of his activities in MapBox. RasterIO deals with raster
+geographic datasets.
 
-Rasterio pracuje s objekty knihovny `NumPy <http://www.numpy.org/>`_
-(podobně jako dříve zmíněná :ref:`Fiona <fiona>` pracuje s objekty
-JSON). Autor tvrdí, že Rasterio se vyslovuje *[raw-STEER-ee-oh]* a
-měla by práci s rastrovými daty udělat více zábavnou a produktivnější.
+RasterIO converts the data to NumPy structures (similar to Fiona, which
+converts vectors to GeoJSON structure).
 
-V následujícím příkladu otevřenem rastrový soubor ve formátu
-:wikipedia-en:`GeoTIFF` a podíváme se na některá metadata:
+In following example, we will open GeoTIFF file
 
-.. code-block:: python
+.. code:: python
 
     >>> import rasterio
-    >>> src = rasterio.open('lsat7_2002_nir.tiff')
-    >>> src.bounds
-    BoundingBox(left=596670.0, bottom=185000.0, right=678330.0, top=258500.0)
-    >>> src.crs
-        {u'lon_0': -79, u'datum': u'NAD83', u'y_0': 0, u'no_defs': True, u'proj': u'lcc', u'x_0': 609601.22,
-         u'units': u'm', u'lat_2': 34.33333333333334, u'lat_1': 36.16666666666666, u'lat_0': 33.75}
-    >>> # tagy formátu GeoTIFF
-    >>> src.tags()
+    >>> src = rasterio.open('data/lsat7_2002_nir.tiff')
+
+    # print metadata
+    >>> print(src.bounds)
+    BoundingBox(left=630540.0, bottom=218670.0, right=643410.0, top=226980.0)
+
+    >>> print(src.crs)
+    {u'lon_0': -79, u'datum': u'NAD83', u'y_0': 0, u'no_defs': True, u'proj': u'lcc', u'x_0': 609601.22, u'units': u'm', u'lat_2': 34.33333333333334, u'lat_1': 36.16666666666666, u'lat_0': 33.75}
+
+    >>> print(src.tags())
     {u'AREA_OR_POINT': u'Area'}
-    >>> src.width, src.height
+
+    >>> print((src.width, src.height))
     (1287, 831)
-    >>> src.res
+
+    >>> print(src.res)
     (10.0, 10.0)
 
-.. figure:: rgb.png
+.. figure:: ../images/rgb.png
 
-   RGB kompozice
+   RGB file
 
-Načtení barevných kanálů:
+Let's read some raster bands
 
-.. code-block:: python
+.. code:: python
 
     >>> data = src.read()
-    >>> len(data)
+    >>> print(len(data))
     3
 
-Vidíme, že v rastru jsou obsaženy tři barevné kanály. Vytvoříme nyní nový
-soubor, obsahující pokus o index NDVI.
+We can see, that there are 3 color bands in given rater file. Let's
+create new file, containing NDVI (Normalized Difference Vegetation Index:
 
-.. note:: :wikipedia-en:`Normalizovaný vegetační index
-    <Normalized_Difference_Vegetation_Index>` je poměr mezi viditelným
-    červeným kanálem a blízkým infračerveným kanálem satelitních dat.
+.. math::
 
-    .. math::
-        
-         NDVI = (NIR - VIS) / (NIR  + VIS)
+    NDVI = (NIR - VIS) / (NIR  + VIS)
 
-Neprve vytvoříme novou matici pro výsledné hodnoty, následně do tohoto pole uložíme
-výsledek výpočtu pro každý pixel. Pracujeme vlastně v prostředí NumPy, které
-práci s poli významně usnadňuje.
+First we have to create new matrix for resulting data. Then we insert
+result of the calculation to each cell.
 
-.. code-block:: python
+We will be working actually with `NumPy <http://www.numpy.org/>`_ structures,
+which is designed for work with large array fields.
+
+.. code:: python
 
     >>> (nir, vis) = (data[0], data[1])
     >>> ndvi = (nir - vis) / (nir + vis)
-    >>> ndvi.min()
-    -0.94444442
-    >>> ndvi.max()
-    0.97435898
+    >>> print(ndvi.min())
+    -0.944444
 
-Výsledek uložíme do nově vytvořeného souboru. Data budou zkomprimována pomocí
-LWZ komprese a uložena v číselném formátu `float64` (mapa obsahuje čísla s
-plovoucí desetinnou čárkou a negativní hodnoty). Výsledný soubor ve formátu GeoTIFF bude mít pouze jeden kanál.
+    >>> print(ndvi.max())
+    0.974359
 
-.. code-block:: python
+Let us now create new raster file, with LWZ compression, encoded in
+float64 type. The file shall have one band and will use the GeoTIFF
+format.
+
+.. code:: python
 
     >>> kwargs = src.meta
     >>> kwargs.update(dtype=rasterio.float64, count=1, compress='lzw')
-    >>> with rasterio.open('ndvi.tif', 'w', **kwargs) as dst:
-    ...    dst.write_band(1, ndvi.astype(rasterio.float64))
+    >>> with rasterio.open('data/ndvi.tif', 'w', **kwargs) as dst:
+    ...     dst.write_band(1, ndvi.astype(rasterio.float64))
 
-.. figure:: ndvi.png
-    
-    Výsledný soubor s NDVI indexem
+.. figure:: ../images/ndvi.png
+
+   NDVI file
+

@@ -6,7 +6,7 @@ import os
 # -- General configuration ------------------------------------------------
 
 # General information about the project.
-project = u'Školení GeoPython'
+project = u'GeoPython Workshop'
 copyright = u'2014, Jáchym Čepický a Martin Landa (GISMentors.eu)'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -21,7 +21,7 @@ release = '%s alpha' % version
 # -- Options for HTML output ----------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Skoleni-GeoPython'
+htmlhelp_basename = 'GeoPython-Workshop'
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -36,6 +36,7 @@ latex_documents = [
     ('index', '%s.tex' % htmlhelp_basename, project,
      copyright, 'manual'),
     ]
+
 
 # -- Options for manual page output ---------------------------------------
 
@@ -61,3 +62,5 @@ sys.path.append(os.path.join('..', 'sphinx-template'))
 from conf_base import *
 
 extensions.append('sphinxcontrib.aafig')
+
+language = 'en'
