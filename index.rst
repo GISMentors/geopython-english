@@ -1,21 +1,13 @@
 ##################
-GeoPython workshop
+GeoPython Workshop
 ##################
 
 Welcome to GeoPython workshop. This workshop should give you brief
 overview about how to use Python when working with geospatial data.
 
-.. only:: html
-
-   `GISMentors <http://gismentors.cz>`_ | Workshop `GRASS GIS
-   <http://gismentors.cz/skoleni/grass-gis>`_ | `QGIS
-   <http://gismentors.cz/skoleni/qgis>`_ | `PostGIS
-   <http://gismentors.cz/skoleni/postgis>`_ | `GeoPython
-   <http://gismentors.cz/skoleni/geopython>`_
-
-   **********
-   Motivation
-   **********
+**********
+Motivation
+**********
 
 .. figure:: images/python-logo.png
    :class: small
@@ -34,15 +26,15 @@ overview about how to use Python when working with geospatial data.
   <http://pywps.wald.intevation.org/>`_, `pycsw <http://pycsw.org/>`_,
   ...)
 * You can use it on desktops too (GRASS GIS - `PyGRASS <http://grass.osgeo.org/grass71/manuals/libpython/pygrass_index.html>`_, Esri ArcGIS - `arcpy <http://resources.arcgis.com/en/help/main/10.1/index.html#//000v000000v7000000>`_, QGIS - `PyQGIS <http://docs.qgis.org/testing/en/docs/pyqgis_developer_cookbook/plugins.html>`_,
-...)
+  ...)
 * Community - `GeoPythonConference <http://geopython.org>`_, `GeoPython on GitHub <http://geopython.github.io>`_
 
 OSGeo-Live
 ----------
 
-If you are using `OSGeo-live <https://live.osgeo.org>`__ DVD, you should
+If you are using `OSGeo-Live <https://live.osgeo.org>`__ DVD, you should
 be fine. If something is missing, ``pip install package_name`` should
-fix it
+fix it.
 
 Custom environment
 ------------------
@@ -69,9 +61,9 @@ Forums and documentation
 * The GIS Stack Exchange: http://gis.stackexchange.com/?tags=python
 * Last but not least, https://www.google.com
 
-============
 Introduction
-============
+------------
+
 `Python <http://python.org>`_ is very popular programing language,
 which has it's supporters and haters. It's syntax is (if compared to
 other languages) specific. Among others, this is caused by the fact, that no
@@ -88,8 +80,7 @@ Example of Python program with one function `main`:
 
         This function will print given name
         """
-
-        print ("Hallo, %s!" % name)
+        print ("Hello, {}!".format(name))
 
     main('world')
 
@@ -103,10 +94,10 @@ Example of Python program with one function `main`:
 .. 
 ..         line to the file
 
-In the world of geomatics is Python very popular (and we can say, that
+In the world of geomatics Python is very popular (and we can say, that
 it's popularity is growing). It's standing between simple scripting
-using SHELL commands and more advanced coding on the system level in e.g.
-C. It can also be compared in some ways to Java platform. Most of the
+using SHELL commands and more advanced coding on the system level e.g. in
+C language. It can also be compared in some ways to Java platform. Most of the
 existing libraries and programs do have their API suitable for Python,
 like `GDAL Python API <http://gdal.org/python/>`_.
 
@@ -126,7 +117,7 @@ Web
 -  MapServer: http://mapserver.org
 -  GeoServer: http://geoserver.org
 -  TileCache: http://tilecache.org
--  PyWPS: http://pywps.wald.intevation.org
+-  PyWPS: http://pywps.org
 -  GeoDjango: http://geodjango.org
 
 Tools and libraries
@@ -150,10 +141,10 @@ Databases
 
 The list is not complete by far of course.
 
-In the workshop, we will focus on the introduction to GDAL library and
-it's superstructures Rasterio and Fiona. We will have a look at OGC OWS
-services and how to interact with them with help of the OWSLib library
-and hopefully in the future, python-mapscript will be described too.
+In the workshop, we will focus on the introduction to **GDAL library** and
+it's superstructures **Rasterio** and **Fiona**. We will have a look at OGC OWS
+services and how to interact with them with help of the **OWSLib library**
+and hopefully in the future, **python-mapscript** will be described too.
 
 The scope of the workshop is not complete coverage of GIS and Python
 topic. We would like to give you just and overview about the tools out
@@ -177,16 +168,15 @@ Table of content
 License
 -------
 
-This material is supposed to be distributed align with Creative Commons
-Attribution-ShareAlike 4.0 International License.
+This material is supposed to be distributed align with `Creative
+Commons Attribution-ShareAlike 4.0 International License
+<http://creativecommons.org/licenses/by-sa/4.0/>`_.
 
-.. figure:: http://training.gismentors.eu/geopython/_images/cc-by-sa.png%20%22CC-BY-SA%204.0%22
-   :alt: CC-BY-SA
-
-   CC-BY-SA
-
+.. figure:: images/cc-by-sa.png 
+   :width: 130px
+   :scale-latex: 120
+              
 Source
 ~~~~~~
 
-Workshop source can be found at:
-https://github.com/GISMentors/geopython"
+Workshop source can be found at: https://github.com/GISMentors/geopython-english
