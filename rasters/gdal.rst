@@ -1,17 +1,20 @@
 GDAL
 ====
 
-GDAL library is fundamental of most open source GIS projects (which are
-not living in Java programming language domain). GDAL enables the work
-with raster data (and part of GDAL distribution is always OGR for vector
-data). Currently, GDAL supports about 130 different raster data formats.
+`GDAL <http://gdal.org>`__ library is fundamental of most open source
+GIS projects (which are not living in Java programming language
+domain). GDAL enables the work with raster data (and part of GDAL
+distribution is always OGR for vector data). Currently, GDAL supports
+about `140 different raster data formats
+<http://gdal.org/formats_list.html>`__.
 
 The concept of raster data is similar to vector data:
 
-Driver - the data format driver DataSource - actual source, from which
-you can read or to which you can save the data RasterBand - one color
-band. By some sources, only one band is available. Sometimes there are
-many (e.g. by hyperspectral raster data)
+* **Driver** - the data format driver
+* **DataSource** - actual source, from which you can read or to which you can save the data
+* **RasterBand** - one color band. By some sources, only one band is
+  available. Sometimes there are many (e.g. by hyperspectral raster
+  data).
 
 .. aafig::
     :aspect: 70
@@ -79,8 +82,8 @@ empty file. For this, we have to specify
 -  number of bands
 -  data type
 
-Then transformation parameters similar to content of the World File has
-to be set
+Then transformation parameters similar to content of the
+:wikipedia-en:`World File` has to be set
 
 -  coordinate of left-upper corner X
 -  x-resolution
@@ -109,9 +112,9 @@ of 1 and not 0). You can write data in the NumPy matrix format.
     ...               [0, 10, 15, 10, 0],
     ...               [0, 0, 0, 0, 0]]))
 
-In the next step, we define coordinate reference system. For this,
-Well-known-text (WKT) format has to be used. Based on it's EPSG code,
-the WKT format you get like this:
+Afterwards, we define coordinate reference system. For this,
+:wikipedia-en:`Well Known Text` (WKT) format has to be used. Based on
+it's :wikipedia-en:`EPSG` code, the WKT format you get like this:
 
 .. code:: python
 
@@ -129,7 +132,7 @@ data are written to hard drive (yes, here is the C++ world wawing at us)
 Rasterization of vector data
 ----------------------------
 
-Next desired operation could be transforamtion from vector data to
+Next desired operation could be transformation from vector data to
 raster data representation. The beginning is similar as in the example
 above:
 
@@ -173,8 +176,8 @@ resulting raster data creation
     >>> target_ds = tiff_driver.Create(raster_fn, x_n, y_n, 3, gdal.GDT_Byte)
     >>> target_ds.SetGeoTransform((x_min, pixel_size, 0, y_max, 0, -pixel_size))
 
-Let's copy information about coordinate reference system (S-JTSK
-EPSG:3035) from the source to target data source:
+Let's copy information about coordinate reference system
+(:epsg:`3035`) from the source to target data source:
 
 .. code:: python
 
@@ -207,5 +210,5 @@ and clean the memory again
 
 .. figure:: ../images/chko.png
 
-   GDAL RasterizeLayer
+   GDAL RasterizeLayer result image
 

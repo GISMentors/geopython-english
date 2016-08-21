@@ -1,12 +1,13 @@
 RasterIO
 ========
 
-RasterIO library is another work of Sean Gillies, this time as one of
-the results of his activities in MapBox. RasterIO deals with raster
-geographic datasets.
+`RasterIO <https://mapbox.github.io/rasterio/>`__ library is another
+work of Sean Gillies, this time as one of the results of his
+activities in MapBox. RasterIO deals with raster geographic datasets.
 
-RasterIO converts the data to NumPy structures (similar to Fiona, which
-converts vectors to GeoJSON structure).
+RasterIO converts the data to :wikipedia-en:`NumPy` structures
+(similar to :doc:`Fiona <fiona>`, which converts vectors to
+:wikipedia-en:`GeoJSON` structure).
 
 In following example, we will open GeoTIFF file
 
@@ -20,7 +21,8 @@ In following example, we will open GeoTIFF file
     BoundingBox(left=630540.0, bottom=218670.0, right=643410.0, top=226980.0)
 
     >>> print(src.crs)
-    {u'lon_0': -79, u'datum': u'NAD83', u'y_0': 0, u'no_defs': True, u'proj': u'lcc', u'x_0': 609601.22, u'units': u'm', u'lat_2': 34.33333333333334, u'lat_1': 36.16666666666666, u'lat_0': 33.75}
+   {u'lon_0': -79, u'datum': u'NAD83', u'y_0': 0, u'no_defs': True, u'proj': u'lcc', u'x_0': 609601.22,
+   u'units': u'm', u'lat_2': 34.33333333333334, u'lat_1': 36.16666666666666, u'lat_0': 33.75}
 
     >>> print(src.tags())
     {u'AREA_OR_POINT': u'Area'}
@@ -44,7 +46,8 @@ Let's read some raster bands
     3
 
 We can see, that there are 3 color bands in given rater file. Let's
-create new file, containing NDVI (Normalized Difference Vegetation Index:
+create new file, containing NDVI (:wikipedia-en:`Normalized Difference
+Vegetation Index`):
 
 .. math::
 
@@ -66,9 +69,9 @@ which is designed for work with large array fields.
     >>> print(ndvi.max())
     0.974359
 
-Let us now create new raster file, with LWZ compression, encoded in
-float64 type. The file shall have one band and will use the GeoTIFF
-format.
+Let us now create new raster file, with :wikipedia-en:`LWZ
+<Lempel–Ziv–Welch>` compression, encoded in float64 type. The file
+shall have one band and will use the GeoTIFF format.
 
 .. code:: python
 
