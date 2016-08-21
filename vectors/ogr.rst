@@ -1,9 +1,10 @@
 OGR
 ===
 
-`OGR <http://gdal.org/ogr>`__ is part of `GDAL <http://gdal.org/>`__
-library. It is traditional way how to interact with vector data.
-Currently it supports about 80 vector formats.
+**OGR** is part of `GDAL <http://gdal.org/>`__ library. It is
+traditional way how to interact with vector data.  Currently it
+supports about `80 vector formats
+<http://gdal.org/ogr_formats.html>`__.
 
 OGR API overpasses differences between various vector formats, services,
 database etc.:
@@ -41,7 +42,7 @@ database etc.:
 
 OGR-Python interface is abstract API on top of original classes and
 methods of original C++ code. Also because of this, some approaches seem
-complicated, compared native Python code, like e.g. Fiona.
+complicated, compared native Python code, like e.g. :doc:`Fiona <fiona>`.
 
 Documentation: http://www.gdal.org/ogr\_apitut.html
 
@@ -86,8 +87,11 @@ Schema of the layer, definition of geometry type and attribution fields:
     True
 
     >>> l.schema
-    [<osgeo.ogr.FieldDefn; proxy of <Swig Object of type 'OGRFieldDefnShadow *' at 0x7febac6d2db0> >, <osgeo.ogr.FieldDefn; proxy of <Swig Object of type 'OGRFieldDefnShadow *' at 0x7febab2822d0> >, <osgeo.ogr.FieldDefn; proxy of <Swig Object of type 'OGR
+    [<osgeo.ogr.FieldDefn; proxy of <Swig Object of type 'OGRFieldDefnShadow *' at 0x7febac6d2db0> >,
+    <osgeo.ogr.FieldDefn; proxy of <Swig Object of type 'OGRFieldDefnShadow *' at 0x7febab2822d0> >,
+    <osgeo.ogr.FieldDefn; proxy of <Swig Object of type 'OGR
     ...
+    ]
 
     >>> l.schema[4].name
     'NAZEV'
@@ -125,7 +129,7 @@ Get geometry centroid
     >>> c.GetPoint()
     (4686578.099945216, 3068229.160325102, 0.0)
 
-Get geometry buffer
+Create geometry buffer
 
 .. code:: python
 
@@ -136,17 +140,18 @@ Get geometry buffer
 Complete example
 ----------------
 
-In this example we will demonstrate work with vector data from begining
-to the end: open data set, metadata, attribute change, saving of new
-attribute back to the file. With Fiona, this would be about 3x simplier.
-However, OGR accesses the data on much lower level compared to Fiona,
-therefore bigger datasets can be interfaced.
+In this example we will demonstrate work with vector data from
+begining to the end: open data set, metadata, attribute change, saving
+of new attribute back to the file. With :doc:`Fiona <fiona>`, this
+would be about 3x simplier.  However, OGR accesses the data on much
+lower level compared to Fiona, therefore bigger datasets can be
+interfaced.
 
 .. code:: python
 
     >>> from osgeo import osr
     
-    >>> # Creating new file with new driver
+    >>> # Creating new file with GML driver
     >>> drv = ogr.GetDriverByName('GML')
     >>> ds = drv.CreateDataSource('data/out.gml')
     >>> srs = osr.SpatialReference()
@@ -178,7 +183,7 @@ therefore bigger datasets can be interfaced.
     >>> feature.Destroy()
     >>> ds.Destroy()
 
-now we can check the result
+And now we can check the result.
 
 .. code:: python
 
@@ -189,5 +194,9 @@ now we can check the result
 
     >>> print(layer.GetFeature(0).GetField('name'))
     the line
+
+    >>> f = layer.GetFeature(0)
+    >>> print(f.GetGeometryRef().Length())
+   1.4142135623730951
 
     >>> ds.Destroy()
