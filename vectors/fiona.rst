@@ -128,8 +128,14 @@ or particular feature can be choosed
     >>> print(pa[54]['properties']['NAZEV'])
     Český ráj
 
-.. todo:: problem s diakritikou
-              
+.. tip:: Fiona tries to guess encodings, and explicitly returns all
+   strings as u’Unicode Strings’ in both Python 2 and 3. In the
+   case of problems you can define encoding when opening file.
+
+   .. code:: python
+
+      >>> pa = fiona.open('data/protected_areas-etrs.shp', 'r', encoding='utf-8')
+
 Feature geometry and shapely library
 ------------------------------------
 
