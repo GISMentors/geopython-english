@@ -11,9 +11,7 @@ Just very short list:
 * ...
 
 MapScript
-=========
-
-
+---------
 
 Following classes have to be defined, if you need to work with MapServer MapFile
 configuration from Python:
@@ -58,7 +56,8 @@ configuration from Python:
 More information: http://mapserver.org/mapscript/python.html
             
 Example
--------
+^^^^^^^
+
 This example will create new `Map` object with `Layer` and `Class` objects
 
 .. code-block:: python
