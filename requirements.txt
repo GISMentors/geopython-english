@@ -1,0 +1,9 @@
+Fiona
+GDAL
+ipython
+jupyter
+notebook
+numpy
+Pillow
+rasterio
+scipy
