@@ -17,3 +17,6 @@ pip install -r requirements
 cd ipython-engl
 jupyter notebook
 ```
+http://jupyter-notebook.readthedocs.io/en/latest/public_server.html
+
+heslo: pycon

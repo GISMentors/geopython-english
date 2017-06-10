@@ -1,9 +1,15 @@
 Fiona
 GDAL
 ipython
+jsonschema
 jupyter
+matplotlib
 notebook
 numpy
+OWSLib
 Pillow
+pyproj
 rasterio
+requests
 scipy
+Shapely
