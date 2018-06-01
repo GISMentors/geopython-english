@@ -8,10 +8,10 @@ The workshop is prepared using [Jupyter Notebook](http://jupyter.org/)
 environment and Python 3. Usually, public Jupyter Notebook instance is set
 on remote server (you will obtain the connection details at the beginning of the
 workshop), so that you, as a workshop participant, do not have to install
-all the dependences on your local machine.
+all the dependencies on your local machine.
 
-However, if you want to perform the workshop on you local machine, you should
-download and install all the dependencies from the `requirements.txt` file.
+However, if you want to perform the workshop on your local machine, you should
+download and install all the dependencies.
 
 For data visualisation on your local machine (no matter, if you perform the
 workshop on remote server or on local Jupyter instance), you definitely should
@@ -30,22 +30,20 @@ virtualenv -p python3 venv
 source venv/bin/activate
 ```
 
-* Install required dependencies
-
-* libgdal-dev (make sure `gdal-config` command is available in your system)
+* Install libgdal-dev (make sure `gdal-config` command is available in your system)
 
 ```
 apt-get install libgdal-dev
 pip3 install GDAL==$(gdal-config --version) --global-option=build_ext --global-option="-I/usr/include/gdal"
 ```
 
-Install `numpy` in advance
+* Install `numpy` in advance
 
 ```
 pip3 install numpy
 ```
 
-And finally, install everything else
+* Finally, install everything else - specified in `requirements.txt`
 
 ```
 pip3 install -r requirements.txt
