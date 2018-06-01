@@ -39,9 +39,14 @@ pip3 install -r requirements.txt
 ## Usage
 
 ```
-cd ipython-en
+cd geopython-english
 jupyter notebook
 ```
+
+Open http://localhost:8080/workshop
+
+## More about Jupyter notebook
+
 http://jupyter-notebook.readthedocs.io/en/latest/public_server.html
 
-heslo: pycon
+Usual password for workshop attendees: `pycon`
