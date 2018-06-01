@@ -19,7 +19,7 @@ download and install [QGIS](http://qgis.org) - an open source desktop GIS. With
 help of QGIS, you will be able to visualize results of our data analysis.
 
 
-## Deps
+## Dependencies
 
 * Install, create and run virtual environment
 
