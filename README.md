@@ -30,7 +30,22 @@ virtualenv -p python3 venv
 source venv/bin/activate
 ```
 
-* Install required dependenices
+* Install required dependencies
+
+* libgdal-dev (make sure `gdal-config` command is available in your system)
+
+```
+apt-get install libgdal-dev
+pip3 install GDAL==$(gdal-config --version) --global-option=build_ext --global-option="-I/usr/include/gdal"
+```
+
+Install `numpy` in advance
+
+```
+pip3 install numpy
+```
+
+And finally, install everything else
 
 ```
 pip3 install -r requirements.txt
