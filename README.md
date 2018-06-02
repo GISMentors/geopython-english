@@ -58,8 +58,12 @@ jupyter notebook
 
 Open http://localhost:8080/workshop
 
-## More about Jupyter notebook
+## More about Jupyter notebook and how to configure it for public
 
 http://jupyter-notebook.readthedocs.io/en/latest/public_server.html
 
 Usual password for workshop attendees: `pycon`
+
+## Workshop schedule
+
+https://docs.google.com/spreadsheets/d/1t4Us0Ujq4BUSxaXQDJeEOKZ_t_Fjd5Vo8jscbZA_6qM/edit?usp=sharing
