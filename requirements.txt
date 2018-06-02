@@ -9,7 +9,7 @@ numpy
 OWSLib
 Pillow
 pyproj
-rasterio
+rasterio==1.0a12
 requests
 scipy
 Shapely
