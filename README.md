@@ -62,6 +62,10 @@ Open http://localhost:8080/workshop
 
 http://jupyter-notebook.readthedocs.io/en/latest/public_server.html
 
+## Pycon Workshop URL
+
+https://bit.ly/2LSGTVX
+
 Usual password for workshop attendees: `pycon`
 
 ## Workshop schedule
