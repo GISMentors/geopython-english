@@ -62,6 +62,20 @@ Open http://localhost:8080/workshop
 
 http://jupyter-notebook.readthedocs.io/en/latest/public_server.html
 
+## Jupyterhub setup
+
+Build and run container with [Jupyternotebook](https://github.com/jupyterhub/jupyterhub).
+
+Configuration file for Jupyterhub is located in `jupyterhub/jupyterhub_config.py`
+
+```
+docker build --tag jupyterhub-geopython .
+docker run --rm -v $(pwd):/data -p 8000:8000 -d --name jupyterhub jupyterhub-geopython
+```
+
+After this, go to the webpage port 8000 and there are 20 users with login and password
+`userN:userN` where N is <1, 20>. Every user has separated container with data.
+
 ## Pycon Workshop URL
 
 https://bit.ly/2LSGTVX
