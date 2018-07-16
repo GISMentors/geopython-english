@@ -80,7 +80,7 @@ After this, go to the webpage port 8000 and there are 20 users with login and pa
 
 http://ec2-18-195-35-63.eu-central-1.compute.amazonaws.com:8000
 
-Usual password for workshop attendees: `pycon`
+Usual password for workshop attendees: `userN/userN`
 
 ## Workshop schedule
 
