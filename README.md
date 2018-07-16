@@ -76,9 +76,9 @@ docker run --rm -v $(pwd):/data -p 8000:8000 -d --name jupyterhub jupyterhub-geo
 After this, go to the webpage port 8000 and there are 20 users with login and password
 `userN:userN` where N is <1, 20>. Every user has separated container with data.
 
-## Pycon Workshop URL
+## FOSS4G-Europe Workshop URL
 
-https://bit.ly/2LSGTVX
+http://ec2-18-195-35-63.eu-central-1.compute.amazonaws.com:8000
 
 Usual password for workshop attendees: `pycon`
 
