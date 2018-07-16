@@ -78,7 +78,7 @@ After this, go to the webpage port 8000 and there are 20 users with login and pa
 
 ## FOSS4G-Europe Workshop URL
 
-http://ec2-18-195-35-63.eu-central-1.compute.amazonaws.com:8000
+http://ec2-18-195-35-63.eu-central-1.compute.amazonaws.com
 
 Usual password for workshop attendees: `userN/userN`
 
