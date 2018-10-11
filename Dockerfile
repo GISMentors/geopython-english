@@ -1,16 +1,18 @@
 FROM jupyterhub/jupyterhub:latest
 
-LABEL com.example.version="1.0.0"
+LABEL com.example.version="1.1.0"
 LABEL vendor="OpenGeoLabs"
-LABEL com.example.release-date="2018-06-26"
+LABEL com.example.release-date="2018-10-11"
 LABEL com.example.version.is-production=""
 
-RUN apt update && apt install -y libgdal-dev gdal-bin vim python3-pip git
+RUN apt update && apt install -y libgdal-dev gdal-bin vim python3-pip git r-base
 RUN pip3 install numpy && pip3 install GDAL==$(gdal-config --version) --global-option=build_ext --global-option="-I/usr/include/gdal"
 RUN mkdir /etc/jupyterhub/
 ADD requirements.txt /etc/jupyterhub
+ADD r-init.r /tmp/
 ADD jupyterhub/jupyterhub_config.py /etc/jupyterhub
 RUN pip3 install -r /etc/jupyterhub/requirements.txt && pip3 install notebook && pip3 install jupyter
+RUN R < /tmp/r-init.r --save
 
 RUN cd /var && git clone https://github.com/gismentors/geopython-english
 
