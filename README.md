@@ -49,6 +49,12 @@ pip3 install numpy
 pip3 install -r requirements.txt
 ```
 
+## Install R support
+
+```
+R < init-r.py --no-save
+```
+
 ## Usage
 
 ```
@@ -69,7 +75,7 @@ Build and run container with [Jupyternotebook](https://github.com/jupyterhub/jup
 Configuration file for Jupyterhub is located in `jupyterhub/jupyterhub_config.py`
 
 ```
-docker build --tag jupyterhub-geopython .
+docker build --tag jupyterhub-geopython-r:latest .
 docker run --rm -v $(pwd):/data -p 8000:8000 -d --name jupyterhub jupyterhub-geopython
 ```
 

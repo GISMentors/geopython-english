@@ -5,7 +5,7 @@ LABEL vendor="OpenGeoLabs"
 LABEL com.example.release-date="2018-10-11"
 LABEL com.example.version.is-production=""
 
-RUN apt update && apt install -y libgdal-dev gdal-bin vim python3-pip git r-base
+RUN apt update && apt install -y libgdal-dev gdal-bin vim python3-pip git r-base libssl-dev
 RUN pip3 install numpy && pip3 install GDAL==$(gdal-config --version) --global-option=build_ext --global-option="-I/usr/include/gdal"
 RUN mkdir /etc/jupyterhub/
 ADD requirements.txt /etc/jupyterhub
