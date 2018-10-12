@@ -23,6 +23,7 @@ RUN for i in `seq 20`; do \
         cp -r /var/geopython-english/workshop /home/$USER/; \
         chown -R $USER:$USER /home/$USER/*; \
 	mkdir /home/${USER}/.local; \
+	chown -R ${USER}:${USER} /home/${USER}; \
 	chown ${USER}:${USER} /home/${USER}/.local; \
 	chmod 777 -R /home/${USER}/.local; \
     done
